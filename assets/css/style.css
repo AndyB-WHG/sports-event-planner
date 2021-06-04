@@ -1,19 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700|Prompt:100,200,300,400,500,600,700');
+
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
+
 * {
     padding: 0;
     border: 0;
     margin: 0;
 }
 
-#hero-mage {
-    height: 35em;
+body {
+    font-family: 'Exo', sans-serif;
+}
+
+.quick-search-box, .quick-search-button {
+    float: right;
+}
+
+
+header {
+    height: 25em;
     width: 100%;
+}
+
+#hero-image {
+    display: block;
+    text-align: center;
+    width: 100%;
+    background:url("../images/stadium-hero-image.jpg") no-repeat left bottom;
+    background-size: cover;
 }
 
 
 /* @media(max-width: 992px) {
-    .quick-search-box {
-    max-width: 50%;
+   
+    max-width: 100%;
     float: right; 
-    }   
+    display: inline-block;
+    }
 } */
 
