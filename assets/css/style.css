@@ -28,19 +28,43 @@ header {
     width: 100%;
     background:url("../images/stadium-hero-image.jpg") no-repeat left bottom;
     background-size: cover;
+    position: relative;
 }
 
-
-/* @media(max-width: 992px) {
-   
-    max-width: 100%;
-    float: right; 
+#hero-image h2 {
+    color: #fafafa;
+    text-align: center;
+    background-color: #0e0d0dc2;
     display: inline-block;
-    }
-} */
+    padding-left: 10px;    
+    padding-right: 10px;
+    position: absolute;
+    left: 65%;
+    top: 20%;
+    height: 5em;
+    width: 7em;
+}
 
 @media (min-width: 992px) {
     .navbar-expand-lg {
         justify-content: space-between;;
 }
+}
+
+@media (max-width: 991px) {
+    #hero-image h2 {
+        font-size: 2em;
+        height: 6.2em;
+        top: 10%;
+    }
+}
+
+@media (max-width: 767px) {
+    #hero-image h2 {
+        font-size: 1.5em;
+        height: 6.2em;
+        width: 6.3em;
+        left: 55%;
+        top: 10%;
+    }
 }
