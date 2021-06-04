@@ -39,3 +39,8 @@ header {
     }
 } */
 
+@media (min-width: 992px) {
+    .navbar-expand-lg {
+        justify-content: space-between;;
+}
+}
