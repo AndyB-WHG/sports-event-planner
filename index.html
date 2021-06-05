@@ -19,18 +19,18 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Sports Event Planner</a>
     <div class="form-div">
-    <form id="quick-search-form">
-      <div class="form-row align-items-center quick-search-box">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInput">Event</label>
-          <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Team or Competition">
+      <form id="quick-search-form">
+        <div class="form-row align-items-center quick-search-box">
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInput">Event</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Team or Competition">
+          </div>
+          <div class="col-auto quick-search-button">
+            <button type="submit" class="btn btn-primary mb-2">Quick Search</button>
+          </div>
         </div>
-        <div class="col-auto quick-search-button">
-          <button type="submit" class="btn btn-primary mb-2">Quick Search</button>
-        </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
 
   </nav>
 
@@ -51,11 +51,21 @@
     <form>
       <div class="form-row">
         <div class="col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="Filter by Sport">
+          <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" type="text"
+            placeholder="Filter by Sport" />
+
+          <datalist id="ice-cream-flavors">
+            <option value="Chocolate"></option>
+            <option value="Coconut"></option>
+            <option value="Mint"></option>
+            <option value="Strawberry"></option>
+            <option value="Vanilla"></option>
+          </datalist>
+          <input type="text" class="form-control filter-by" placeholder="Filter by Sport">
         </div>
         <div class="col-6 col-md-4">
           <input type="text" class="form-control" placeholder="Filter by Team / Competitor">
-        </div> 
+        </div>
         <div class="col-6 col-md-4">
           <input type="text" class="form-control" placeholder="Filter by Competition">
         </div>
@@ -72,7 +82,8 @@
     </form>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Sport
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -83,7 +94,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Team / Competitor
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -94,7 +106,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Competition
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -105,7 +118,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         City
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -116,7 +130,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Country
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -127,7 +142,8 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle px-5 bx-2" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Date
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -136,6 +152,40 @@
         <a class="dropdown-item" href="#">Something else here</a>
       </div>
     </div>
+
+    <div class="my-filter-buttons col-6 col-md-4">
+      <button>
+        Sport
+      </button>
+    </div>
+
+    <section>
+      <div class="box-for-labels">
+        <label class="filter" for="age">Age</label>
+        <select id="age" name="age">
+          <option value="under-20">Under 20</option>
+          <option value="20s">20-29</option>
+          <option value="30s">30-39</option>
+          <option value="40s">40-49</option>
+          <option value="50s">50-59</option>
+          <option value="60+">60+</option>
+        </select>
+        </label>
+      </div>
+
+      <!-- <label for="ice-cream-choice">What's your favourite ice cream flavor?</label> -->
+      <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" type="text"
+        placeholder="Filter by Sport" />
+
+      <datalist id="ice-cream-flavors">
+        <option value="Chocolate"></option>
+        <option value="Coconut"></option>
+        <option value="Mint"></option>
+        <option value="Strawberry"></option>
+        <option value="Vanilla"></option>
+      </datalist>
+
+    </section>
 
   </section>
   <section id="map">
