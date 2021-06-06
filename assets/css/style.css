@@ -47,11 +47,28 @@ header {
 
 #filters {
     padding-top: 5px;
+    background-color: #f8f9fa;
+}
+
+#filters .row {
+    margin-right: 0;
+    margin-left: -23px;
 }
 
 .filter-input {
     font-size: small;
     padding: 5px;
+    border-style: solid;
+    border-color: rgb(29, 30, 31);
+    border-width: 1px;
+    border-radius: 4px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .inline-div {
@@ -62,10 +79,12 @@ header {
     display:inline-block;
     width: 35%;
     height: 1.5em;
-    border-style: solid;
-    border-color: slategray;
-
+    padding-left: 0;
     
+}
+
+.filter-box {
+    margin-bottom: 3px;
 }
 
 .box-for-labels {
