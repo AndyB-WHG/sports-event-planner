@@ -147,3 +147,20 @@ header {
     }
 
 }
+
+@media (min-width: 992px) {
+    .filter-input {
+        width: 16%;
+    }
+    .odd {
+        margin-left: 0;
+    }
+    .even {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .filter-section {
+        margin-left: 2%;
+    }
+
+}
