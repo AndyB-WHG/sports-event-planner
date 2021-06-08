@@ -90,22 +90,14 @@ header {
 }
 
 .inline-div {
-    /* font-size: small; */
-    /* padding-right: 20px;
-    border: 0;
-    margin-right: 20px; */
     display:inline-block;
-    /* width: 100%; */
     height: 1.5em;
     padding-left: 0;
-    
 }
 
 .filter-box {
     margin-bottom: 3px;
 }
-
-
 
 @media (min-width: 992px) {
     .navbar-expand-lg {
