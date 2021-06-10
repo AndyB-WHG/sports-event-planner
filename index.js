@@ -17,8 +17,23 @@ fetch("https://api.predicthq.com/v1/events/calendar?category=sports&country=GB",
     Authorization: `Bearer 63gK8tsgkCkaRrApdNwOll0sbnXJzAD8EsFCJSSU`
   }
 })
-  .then(res => res.json())
-  .then(json => console.log(json));
+  .then(response => {return response.json();
+  }) 
+  .then((myContent) => {
+    // console.dir(myContent);
+    // console.log(myContent);
+    // myContent = myContent.results[1];
+    myContent = myContent.results;
+    console.log(myContent);
+    document.getElementById("data").innerHTML = myContent;
+
+    myContent.forEach(element => {
+      document.getElementById("data").innerHTML = myContent.labels;
+    });
+
+    
+  });
+  
 
   // curl -X GET -H "Authorization: Bearer 63gK8tsgkCkaRrApdNwOll0sbnXJzAD8EsFCJSSU" \
   //           -H "Accept: application/json" \
