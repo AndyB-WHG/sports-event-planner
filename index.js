@@ -20,19 +20,25 @@ fetch("https://api.predicthq.com/v1/events/calendar?category=sports&country=GB",
   .then(response => {return response.json();
   }) 
   .then((myContent) => {
-    // console.dir(myContent);
-    // console.log(myContent);
-    // myContent = myContent.results[1];
-    myContent = myContent.results;
+    // myContent = myContent;
     console.log(myContent);
-    document.getElementById("data").innerHTML = myContent;
+    mycontent = myContent.results;
+    // myContent = myContent.results[0].date;
+    // document.getElementById("data").innerHTML = myContent;
+      console.log(myContent.count);
+      // document.getElementById("data").innerHTML = myContent;
+      for (i = 0, len = myContent.count, text = ""; i < len; i++) {
+        
+        text += myContent[i] + "<br>";
+        document.getElementById("data").innerHTML = text;
+      }
 
-    myContent.forEach(element => {
-      document.getElementById("data").innerHTML = myContent.labels;
-    });
+
+    // })
+  });
 
     
-  });
+
   
 
   // curl -X GET -H "Authorization: Bearer 63gK8tsgkCkaRrApdNwOll0sbnXJzAD8EsFCJSSU" \
