@@ -1,45 +1,29 @@
-// var xhr = new XMLHttpRequest();
+var placeID;
 
-// xhr.open("GET", "https://api.schedjoules.com/categories/sports/boxing");
-
-// xhr.setRequestHeader("Authorization", "Bearer {0443a55244bb2b6224fd48e0416f0d9c}");
-
-// xhr.send();
-
-// xhr.onstatereadychange = function () {
-//     if (this.readyState == 4 && this.status == 200) {
-//         document.getElementById("data").innerHTML = this.responseText;
-//     }
-// };
-
-fetch("https://api.predicthq.com/v1/events/calendar?category=sports&country=GB", {
+fetch("https://api.predicthq.com/v1/places/?q=Nottingham,England", {
   headers: {
-    Authorization: `Bearer 63gK8tsgkCkaRrApdNwOll0sbnXJzAD8EsFCJSSU`
+    Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
   }
 })
-  .then(response => {return response.json();
-  }) 
+  .then(response => {return response.json();}) 
   .then((myContent) => {
-    // myContent = myContent;
-    console.log(myContent);
-    mycontent = myContent.results;
-    // myContent = myContent.results[0].date;
-    // document.getElementById("data").innerHTML = myContent;
-      console.log(myContent.count);
-      // document.getElementById("data").innerHTML = myContent;
-      for (i = 0, len = myContent.count, text = ""; i < len; i++) {
-        
-        text += myContent[i] + "<br>";
-        document.getElementById("data").innerHTML = text;
+    placeID = myContent.results[0].id;
+    return myContent.results[0].id;
+  }).then (function(placeID) {
+    console.log("PlaceID = " + placeID);
+    fetch("https://api.predicthq.com/v1/events/?place.scope=" + placeID + "&active.gte=2021-03-01&active.lte=2021-03-31&category=sports&sort=rank", {
+      headers: {
+        Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
       }
-
-
-    // })
-  });
-
-    
-
-  
-
-  // curl -X GET -H "Authorization: Bearer 63gK8tsgkCkaRrApdNwOll0sbnXJzAD8EsFCJSSU" \
-  //           -H "Accept: application/json" \
+    })
+    .then(response => {return response.json();}) 
+    .then((myContent) => {
+      console.log(myContent);
+      myContent = myContent.results;  
+      console.log(myContent);
+      console.log(myContent.length);
+      for (i = 0, len = myContent.length, text=""; i < len; i++) {
+        text += myContent[i].title + "<br>";
+        document.getElementById("data").innerHTML = text; }
+    }   
+    )});
