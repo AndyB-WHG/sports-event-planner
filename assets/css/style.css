@@ -70,7 +70,7 @@ header {
     margin-bottom: 0.2em;
 }
 
-.filter-input {
+.filter-input, .submit-button {
     font-family: 'Play';
     width: 46%;
     display: inline-block;
@@ -99,6 +99,10 @@ header {
     margin-bottom: 3px;
 }
 
+.submit-button {
+    margin-left: 7px;
+}
+
 @media (min-width: 992px) {
     .navbar-expand-lg {
         justify-content: space-between;;
@@ -120,12 +124,15 @@ header {
         width: 6.3em;
         left: 55%;
         top: 10%;
+    }    
+    .submit-button {
+        margin-left: 3px;
+        }
     }
-}
 
 @media (min-width: 768px) {
-    .filter-input {
-        width: 32%;
+    .filter-input, .submit-button {
+        width: 12%;
     }
     .odd {
         margin-left: 0;
@@ -136,12 +143,13 @@ header {
     }
     .filter-section {
         margin-left: 3%;
+        margin-right: 2%;
     }
 
 }
 
-@media (min-width: 992px) {
-    .filter-input {
+/* @media (min-width: 992px) {
+    .filter-input, .submit-button {
         width: 16%;
     }
     .odd {
@@ -153,6 +161,7 @@ header {
     }
     .filter-section {
         margin-left: 2%;
-    }
+        
+    } */
 
 }

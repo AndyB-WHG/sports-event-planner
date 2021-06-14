@@ -40,13 +40,34 @@
   <header id="hero-image" aria-label="Stadium full of people">
     <div id="callout">
       <h2>
-        Any sports event in the world at the click of a button!
+        Plan any sports trip in the world at the click of a button!
       </h2>
     </div>
 
   </header>
 
   <section class="filter-section">
+
+    <input list="start-date" id="start-date-filter" name="start-date" type="text" placeholder="Start Date"
+      class="filter-input odd" />
+    <datalist id="event-date">
+      <option value="Chocolate"></option>
+      <option value="Coconut"></option>
+      <option value="Mint"></option>
+      <option value="Strawberry"></option>
+      <option value="Vanilla"></option>
+    </datalist>
+
+
+    <input list="end-date" id="end-date-filter" name="end-date" type="text" placeholder="End Date"
+      class="filter-input even" />
+    <datalist id="event-date">
+      <option value="Chocolate"></option>
+      <option value="Coconut"></option>
+      <option value="Mint"></option>
+      <option value="Strawberry"></option>
+      <option value="Vanilla"></option>
+    </datalist>
 
     <input list="sport-name" id="sport-filter" name="sport-name" type="text" placeholder="Filter by Sport"
       class="filter-input odd" />
@@ -95,21 +116,8 @@
     </datalist>
 
 
-
-    <input list="event-date" id="date-filter" name="event-date" type="text" placeholder="Filter by Date"
-      class="filter-input odd" />
-    <datalist id="event-date">
-      <option value="Chocolate"></option>
-      <option value="Coconut"></option>
-      <option value="Mint"></option>
-      <option value="Strawberry"></option>
-      <option value="Vanilla"></option>
-    </datalist>
-
-
-
     <input list="city-name" id="city-filter" name="city-name" type="text" placeholder="Filter by City"
-      class="filter-input even" />
+      class="filter-input odd" />
 
     <datalist id="city-name">
       <option value="Chocolate"></option>
@@ -118,6 +126,15 @@
       <option value="Strawberry"></option>
       <option value="Vanilla"></option>
     </datalist>
+
+
+    
+    
+
+
+    <button class="submit-button odd">
+      Submit
+    </button>
 
 
   </section>
