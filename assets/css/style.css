@@ -48,15 +48,17 @@ header {
 #filters {
     padding-top: 5px;
     background-color: #f8f9fa;
+    
 }
 
 #filters .row {
     margin-right: 0;
-    margin-left: -23px;
+    /* margin-left: -23px; */
 }
 
 .filter-section {
     margin-top: 0.7em;
+
 }
 
 .odd {
@@ -87,6 +89,7 @@ header {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-align: center;
 }
 
 .inline-div {
@@ -132,7 +135,7 @@ header {
 
 @media (min-width: 768px) {
     .filter-input, .submit-button {
-        width: 12%;
+        width: 24%;
     }
     .odd {
         margin-left: 0;
@@ -142,8 +145,8 @@ header {
         margin-left: 0;
     }
     .filter-section {
-        margin-left: 3%;
-        margin-right: 2%;
+        margin-left: 2.5%;
+        /* margin-right: 2%; */
     }
 
 }
