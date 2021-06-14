@@ -26,7 +26,10 @@
         <div class="form-row align-items-center quick-search-box">
           <div class="col-auto">
             <label class="sr-only" for="inlineFormInput">Event</label>
-            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Team or Competition">
+            <input list="quick-search-input-box" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Team or Competition">
+            <datalist id="quick-search-input-box">
+              
+            </datalist>
           </div>
           <div class="col-auto quick-search-button">
             <button type="button" id="quick-search-button" class="btn btn-primary mb-2">Quick Search</button>
