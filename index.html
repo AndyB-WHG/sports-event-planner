@@ -10,6 +10,8 @@
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="index.js"></script>
   
   <title>Sports Event Planner</title>
@@ -24,12 +26,9 @@
     <div class="form-div">
       <form id="quick-search-form">
         <div class="form-row align-items-center quick-search-box">
-          <div class="col-auto">
-            <label class="sr-only" for="inlineFormInput">Event</label>
-            <input list="quick-search-input-box" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Team or Competition">
-            <datalist id="quick-search-input-box">
-              
-            </datalist>
+          <div class="col-auto ui-widget">
+            <label class="sr-only" for="quick-search-input-box">Event</label>
+            <input type="text" class="form-control mb-2" id="quick-search-input-box" placeholder="Team or Competition">
           </div>
           <div class="col-auto quick-search-button">
             <button type="button" id="quick-search-button" class="btn btn-primary mb-2">Quick Search</button>
@@ -172,6 +171,9 @@
     integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
   </script>
   
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
 </html>

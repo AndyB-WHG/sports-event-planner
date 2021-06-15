@@ -1,4 +1,4 @@
-fetch("https://api.predicthq.com/v1/events/?q=european&rank.gte=10&active.gte=2021-06-14&active.lte=2021-07-20&category=sports&limit=50&label=soccer&sort=start", {
+fetch("https://api.predicthq.com/v1/places/?q=New+York&limit=5", {
         headers: {
             Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
         }
@@ -11,10 +11,26 @@ fetch("https://api.predicthq.com/v1/events/?q=european&rank.gte=10&active.gte=20
         myContent = myContent.results;
         console.log(myContent);
         console.log(myContent.length);
-        for (i = 0, len = myContent.length, text = ""; i < len; i++) {
-            text += "<option value=" + myContent[i].title + "></option><br>";
+        console.log("First item found is : " + myContent[0].name);
+        for (i = 0, len = myContent.length, text="", options = []; i < len; i++) {
+            // options += "<option value=" + myContent[i].name + "></option>";
+            options[i] = myContent[i].name;
+            
+            text += myContent[i].name + "<br>";
+
+            $(function() {
+                console.log("Starting 'Autocomplete' function");
+                console.log("Options are : " + options);
+                console.log(typeof options);
+                var availableTags = options;
+                $( "#quick-search-input-box" ).autocomplete({
+                  source: availableTags
+                });
+              } );
         }
-        document.getElementById("quick-search-input-box").innerHTML = text;
+        document.getElementById("data").innerHTML = text;
+        console.log(options);
+        // document.getElementById("quick-search-input-box").innerHTML = options;
     });
 
 // $(document).ready(function() {
