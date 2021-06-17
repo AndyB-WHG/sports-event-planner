@@ -7,14 +7,62 @@ var initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2020-06
 var APIaddress = "";
 var nextPage = "";
 
-$(document).ready(function populateQuickSearchBox() {
-    if (APIaddress === "") {
-        APIaddress = initialAPIaddress;
-    } else {
-        APIaddress = nextPage;
+$(document).ready(function() {
+    APIaddress = initialAPIaddress;
+    console.log(APIaddress)
+    populateQuickSearchBox(APIaddress);
+});
+
+
+function populateQuickSearchBox(apiAddress) {
+    console.log(apiAddress);
+    var myContent = fetchAPIdata(apiAddress);
+    console.log(myContent);
+    console.log("Count =" + myContent.count);
+    var nextPage = myContent.next;
+    console.log("Next page address : " + nextPage);
+    console.log("Type of Next Page : " + typeof nextPage)
+    pageLength = myContent.results.length;
+    console.log("Page length : " + pageLength);
+    console.log("Page Length type : " + typeof pageLength);
+    resultsTotal = myContent.count;
+    itemsFetched += pageLength;
+    myContent = myContent.results;
+    console.log(myContent);
+    for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
+        text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
+        options.push(myContent[i].title);
     }
-    console.log(APIaddress);
-    fetch(APIaddress, {
+    // totalOptions += options;
+    // console.log("Total Options are: " + totalOptions);
+    // totalText += text;
+    $(function () {
+        totalOptions = totalOptions.concat(options);
+        console.log("Total Options are: " + totalOptions);
+        var quickSearchList = totalOptions;
+        $("#quick-search-input-box").autocomplete({
+            source: quickSearchList
+        });
+    });
+
+    console.log("Items fetched : " + itemsFetched);
+    console.log("Total results : " + resultsTotal);
+    totalText = totalText.concat(text);
+    document.getElementById("data").innerHTML = totalText;
+
+    if (itemsFetched < resultsTotal && itemsFetched < 200) {
+        console.log("Next Page address : " + myContent.next);
+        nextPage = myContent.next;
+        console.log(nextPage);
+        fetchAPIdata(nextPage);
+    }
+};
+
+
+
+function fetchAPIdata(apiAddress) {
+    console.log("API Address at JS Line 64: " + apiAddress);
+    fetch(apiAddress, {
             headers: {
                 Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
             }
@@ -24,46 +72,12 @@ $(document).ready(function populateQuickSearchBox() {
         })
         .then((myContent) => {
             console.log(myContent);
-            console.log("Count =" + myContent.count);
-            var nextPage = myContent.next;
-            console.log("Next page address : " + nextPage);
-            console.log("Type of Next Page : " + typeof nextPage)
-            pageLength = myContent.results.length;
-            console.log("Page length : " + pageLength);
-            console.log("Page Length type : " + typeof pageLength);
-            resultsTotal = myContent.count;
-            itemsFetched += pageLength;
             myContent = myContent.results;
             console.log(myContent);
-            for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
-                text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
-                options.push(myContent[i].title);
-            }
-            // totalOptions += options;
-            // console.log("Total Options are: " + totalOptions);
-            // totalText += text;
-            $(function () {
-                totalOptions = totalOptions.concat(options);
-                console.log("Total Options are: " + totalOptions);
-                var quickSearchList = totalOptions;
-                $("#quick-search-input-box").autocomplete({
-                    source: quickSearchList
-                });
-            });
-
-            console.log("Items fetched : " + itemsFetched);
-            console.log("Total results : " + resultsTotal);
-            totalText = totalText.concat(text);
-            document.getElementById("data").innerHTML = totalText;
-
-            if (itemsFetched < resultsTotal && itemsFetched < 200) {
-                console.log("Next Page address : " + myContent.next);
-                // nextPage = myContent.next;
-                console.log(nextPage);
-                populateQuickSearchBox();
-            }
+        
         });
-});
+        return myContent;
+};
 
 
 $(document).ready(function () {
