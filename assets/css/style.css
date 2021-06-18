@@ -12,6 +12,11 @@ body {
     font-family: 'Exo', sans-serif;
 }
 
+#quick-search-input-box {
+    width: 100%;
+    margin-right: 100px;
+}
+
 .quick-search-box, .quick-search-button {
     float: right;
 }
@@ -112,6 +117,13 @@ header {
 }
 }
 
+@media screen and (min-width:400px ) and (max-width:500px) {
+    .quick-search-button {
+        display: block;
+
+    }
+}
+
 @media (max-width: 991px) {
     #hero-image h2 {
         font-size: 2em;
@@ -149,6 +161,29 @@ header {
         /* margin-right: 2%; */
     }
 
+}
+@media (min-width: 820px) {
+    #quick-search-input-box {
+    width: 130%;
+    position: relative;
+    right: 100px;
+    }
+}
+
+@media (min-width: 992px) {
+    #quick-search-input-box {
+    width: 170%;
+    position: relative;
+    right: 228px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #quick-search-input-box {
+    width: 200%;
+    position: relative;
+    right: 323px;
+    }
 }
 
 /* @media (min-width: 992px) {

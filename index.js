@@ -77,7 +77,7 @@ function continuationFunction(myContent) {
 
     localStorage.setItem('apiData', options);
 
-    if (itemsFetched < resultsTotal && itemsFetched < 500) {
+    if (itemsFetched < resultsTotal && itemsFetched < 50) {
         console.log("13. Next Page address : " + nextPage);
         // console.log("14. " + nextPage);
         fetchAPIdata(nextPage);
