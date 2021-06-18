@@ -109,15 +109,20 @@ function retrieveChosenEventDetails() {
     console.log(searchItem);
     var d = new Date();
     var currentDay = d.getDate();
+    var currentMonth = d.getMonth();
     console.log("4a. Date: " + d);
     if (currentDay < 10) {
         var dayString = currentDay.toString();
         currentDay = "0" + dayString;
     } 
+    if (currentMonth < 10) {
+        var monthString = currentMonth.toString();
+        currentMonth = "0" + monthString;
+    } 
 
-    //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. '.value'add
+    //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
-    var apiQueryAddress = baseAPIaddress + "active.gte" + d.getFullYear + "-" + 
+    var apiQueryAddress = baseAPIaddress + "active.gte=" + d.getFullYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + ((d.getFullYear) + 1) + "-" + currentMonth + "-" + currentDay + "category=sports&local_rank.gte=40&limit=50&title=" + value + "&sort=rank";
 
     // active.gte=2020-06-15&active.lte=2021-07-15&category=sports&local_rank.gte=40&limit=100&sort=rank
     
