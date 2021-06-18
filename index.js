@@ -32,7 +32,8 @@ function fetchAPIdata(apiAddress) {
             return response.json();
         })
         .then((myContent) => {
-            console.log("3. " + myContent.results);
+            console.log(myContent);
+            // console.log("3. " + myContent.results);
             myContent = myContent;
             continuationFunction(myContent);
 
@@ -56,8 +57,23 @@ function continuationFunction(myContent) {
     itemsFetched += pageLength;
     myContent = myContent.results;
     for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
-        // text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
+        text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
         options.push(myContent[i].title);
+    }
+
+    
+
+    // console.log("11. Items fetched : " + itemsFetched);
+    // console.log("12. Total results : " + resultsTotal);
+    totalText = totalText.concat(text);
+    // document.getElementById("data").innerHTML = totalText;
+
+    localStorage.setItem('apiData', options);
+
+    if (itemsFetched < resultsTotal && itemsFetched < 50) {
+        // console.log("13. Next Page address : " + nextPage);
+        // console.log("14. " + nextPage);
+        fetchAPIdata(nextPage);
     }
 
     // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
@@ -76,20 +92,10 @@ function continuationFunction(myContent) {
             });
         });
 
-    }
-
-    // console.log("11. Items fetched : " + itemsFetched);
-    // console.log("12. Total results : " + resultsTotal);
-    totalText = totalText.concat(text);
-    document.getElementById("data").innerHTML = totalText;
-
-    localStorage.setItem('apiData', options);
-
-    if (itemsFetched < resultsTotal && itemsFetched < 50) {
-        // console.log("13. Next Page address : " + nextPage);
-        // console.log("14. " + nextPage);
-        fetchAPIdata(nextPage);
-    }
+    } else {
+        document.getElementById("data").innerHTML = totalText;
+        
+    };
 }
 
 // $(document).ready(function () {
@@ -106,11 +112,14 @@ function continuationFunction(myContent) {
 
 function retrieveChosenEventDetails() {
     var searchItem = document.getElementById("quick-search-input-box").value;
-    console.log(searchItem);
+    console.log("4. User Search Request: " + searchItem);
     var d = new Date();
     var currentDay = d.getDate();
     var currentMonth = d.getMonth();
-    console.log("4a. Date: " + d);
+    var currentYear = d.getFullYear();
+    var nextYear = currentYear + 1;
+    console.log("4.1 Next Year : " + nextYear);
+    console.log("5. Date: " + d);
     if (currentDay < 10) {
         var dayString = currentDay.toString();
         currentDay = "0" + dayString;
@@ -122,10 +131,11 @@ function retrieveChosenEventDetails() {
 
     //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
-    var apiQueryAddress = baseAPIaddress + "active.gte=" + d.getFullYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + ((d.getFullYear) + 1) + "-" + currentMonth + "-" + currentDay + "category=sports&local_rank.gte=40&limit=50&title=" + value + "&sort=rank";
+    var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=50&q=" + searchItem + "&sort=rank";
 
-    // active.gte=2020-06-15&active.lte=2021-07-15&category=sports&local_rank.gte=40&limit=100&sort=rank
-    
+    console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiAddress)
+    fetchAPIdata(apiQueryAddress)
+
+
 }
