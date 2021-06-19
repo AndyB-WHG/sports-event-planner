@@ -3,16 +3,17 @@ var totalText = [];
 var resultsTotal;
 var pageLength;
 var itemsFetched = 0;
-const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2020-06-15&active.lte=2021-07-15&category=sports&local_rank.gte=40&limit=100&sort=rank";
+const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-19&active.lte=2022-06-18&category=sports&local_rank.gte=40&limit=100&sort=rank";
 var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 
 
+
 // 1. Connects to API when page is loaded.
 
 $(document).ready(function populateQuickSearchBox() {
-    APIaddress = initialAPIaddress;
+    // APIaddress = initialAPIaddress;
     // console.log("1. " + initialAPIaddress)
     fetchAPIdata(initialAPIaddress);
     // populateQuickSearchBox(initialAPIaddress);
@@ -22,6 +23,10 @@ $(document).ready(function populateQuickSearchBox() {
 // 2. Handles API GET requests
 
 function fetchAPIdata(apiAddress) {
+    if (apiAddress != initialAPIaddress) {
+        // queryAddress = apiAddress;
+        // object.freeze(queryAddress);
+    }
     console.log("2.5 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
@@ -34,8 +39,8 @@ function fetchAPIdata(apiAddress) {
         .then((myContent) => {
             console.log(myContent);
             // console.log("3. " + myContent.results);
-            myContent = myContent;
-            continuationFunction(myContent);
+            // myContent = myContent;
+            continuationFunction(myContent, apiAddress);
 
         });
 
@@ -44,7 +49,7 @@ function fetchAPIdata(apiAddress) {
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent) {
+function continuationFunction(myContent, apiAddress) {
     // console.log("3.5 Content before 'Count' (line20)" + myContent);
     // console.log("4. Count =" + myContent.count);
     var nextPage = myContent.next;
@@ -68,7 +73,7 @@ function continuationFunction(myContent) {
     totalText = totalText.concat(text);
     // document.getElementById("data").innerHTML = totalText;
 
-    localStorage.setItem('apiData', options);
+    // localStorage.setItem('apiData', options);
 
     if (itemsFetched < resultsTotal && itemsFetched < 50) {
         // console.log("13. Next Page address : " + nextPage);
@@ -78,7 +83,7 @@ function continuationFunction(myContent) {
 
     // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
 
-    if (APIaddress = initialAPIaddress) {
+    if (apiAddress === initialAPIaddress) {
 
         // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results 
         // of the initial API request to give potential events for the user to select from or ignore as required.
@@ -95,7 +100,10 @@ function continuationFunction(myContent) {
     } else {
         document.getElementById("data").innerHTML = totalText;
         
+        
     };
+    itemsFetched = 0;    // resets the variable ready for the next search request.
+    totalText = "";
 }
 
 // $(document).ready(function () {
@@ -115,7 +123,7 @@ function retrieveChosenEventDetails() {
     console.log("4. User Search Request: " + searchItem);
     var d = new Date();
     var currentDay = d.getDate();
-    var currentMonth = d.getMonth();
+    var currentMonth = d.getMonth() + 1;
     var currentYear = d.getFullYear();
     var nextYear = currentYear + 1;
     console.log("4.1 Next Year : " + nextYear);
