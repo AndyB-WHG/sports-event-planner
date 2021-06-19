@@ -66,8 +66,6 @@ function continuationFunction(myContent, apiAddress) {
         options.push(myContent[i].title);
     }
 
-    
-
     // console.log("11. Items fetched : " + itemsFetched);
     // console.log("12. Total results : " + resultsTotal);
     totalText = totalText.concat(text);
@@ -97,24 +95,17 @@ function continuationFunction(myContent, apiAddress) {
             });
         });
 
-    } else {
-        document.getElementById("data").innerHTML = totalText;
-        
-        
-    };
+    } 
+
+
+    document.getElementById("data").innerHTML = totalText;
+    
     itemsFetched = 0;    // resets the variable ready for the next search request.
     totalText = "";
-}
 
-// $(document).ready(function () {
-//     $("#quick-search-button").on("click", function () {
-//         if (document.getElementById("data").innerHTML != "You turned me on!") {
-//             document.getElementById("data").innerHTML = "You turned me on!";
-//         } else {
-//             document.getElementById("data").innerHTML = "Now I'm switched off!";
-//         }
-//     });
-// });
+    createResultsTable(myContent);
+
+}
 
 // Get the text typed into the 'Quick Search' box by the User (happens when the User clicks the 'Search Button' in the Nav Bar).
 
@@ -145,5 +136,34 @@ function retrieveChosenEventDetails() {
 
     fetchAPIdata(apiQueryAddress)
 
+}
+
+function createResultsTable(apiData) {
+    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name","Country","Label 1", "Label 2"];
+    let tableHeaders = [];
+    let tableRows = [];
+    let tableData = [];
+
+    tableKeys.forEach(header => {
+        tableHeaders.push(`<th>${header}</th>`);
+    });
+
+    apiData.forEach(result => {
+        tableData.push(`<td>${result.title}</td>`);
+        tableData.push(`<td>${result.start}</td>`);
+        tableData.push(`<td>${result.end}</td>`);
+        tableData.push(`<td>${result.place_hierarchies[0,0]}</td>`);
+        tableData.push(`<td>${result.country}</td>`);
+        tableData.push(`<td>${result.labels[0]}</td>`);
+        tableData.push(`<td>${result.labels[1]}</td>`);
+
+        tableRows.push(`<tr>${tableData}</tr>`);
+
+        tableData = [];
+    });
+
+    
+
+    document.getElementById("data").innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
 
 }
