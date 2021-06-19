@@ -95,12 +95,12 @@ function continuationFunction(myContent, apiAddress) {
             });
         });
 
-    } 
+    }
 
 
     document.getElementById("data").innerHTML = totalText;
-    
-    itemsFetched = 0;    // resets the variable ready for the next search request.
+
+    itemsFetched = 0; // resets the variable ready for the next search request.
     totalText = "";
 
     createResultsTable(myContent);
@@ -122,11 +122,11 @@ function retrieveChosenEventDetails() {
     if (currentDay < 10) {
         var dayString = currentDay.toString();
         currentDay = "0" + dayString;
-    } 
+    }
     if (currentMonth < 10) {
         var monthString = currentMonth.toString();
         currentMonth = "0" + monthString;
-    } 
+    }
 
     //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
@@ -139,7 +139,7 @@ function retrieveChosenEventDetails() {
 }
 
 function createResultsTable(apiData) {
-    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name","Country","Label 1", "Label 2"];
+    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name", "Country", "Label 1", "Label 2"];
     let tableHeaders = [];
     let tableRows = [];
     let tableData = [];
@@ -154,15 +154,20 @@ function createResultsTable(apiData) {
         tableData.push(`<td>${result.end}</td>`);
         tableData.push(`<td>${result.place_hierarchies[0,0]}</td>`);
         tableData.push(`<td>${result.country}</td>`);
-        tableData.push(`<td>${result.labels[0]}</td>`);
-        tableData.push(`<td>${result.labels[1]}</td>`);
+
+        for (i = 0, len = result.labels.length; i < len; i++) {
+
+            if (result.labels[i] != "sport") {
+                tableData.push(`<td>${result.labels[i]}</td>`);
+            }
+        }
 
         tableRows.push(`<tr>${tableData}</tr>`);
 
         tableData = [];
     });
 
-    
+
 
     document.getElementById("data").innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
 
