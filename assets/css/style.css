@@ -135,10 +135,13 @@ td, th {
     /* border-bottom: 1px solid #ddd; */
 }
 
-/* tbody>tr>:nth-child(2){
-    width:100px !important;
-    text-align:right;
-   } */
+#resultsTable>tbody>tr>:nth-child(2), #resultsTable>tbody>tr>:nth-child(3){
+    width:100px;
+}
+
+#resultsTable>tbody>tr>:nth-child(1) {
+    /* width:50%; */
+   }
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -150,6 +153,7 @@ tr:hover {
     text-decoration-style: double; */
     /* font-size:large; */
     font-weight: bold;
+    font-size: 0.98em;
 }
 
 th, th:hover {

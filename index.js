@@ -172,15 +172,16 @@ function createResultsTable(apiResults, fullAPI) {
         tableData.push(`<td>${result.title}</td>`);
 
         let strToShorten = result.start.toString();
-        let shortenedString = strToShorten.substring(0, 10);
-        tableData.push(`<td>${shortenedString}</td>`);
+        reorderedString = cleanUpDates(strToShorten);
+        tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = result.end.toString();
-        shortenedString = strToShorten.substring(0, 10);
-        tableData.push(`<td>${shortenedString}</td>`);
+        reorderedString = cleanUpDates (strToShorten);
+        tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = result.place_hierarchies[0, 0].toString();
         shortenedString = strToShorten.substring(0, 7);
+
         tableData.push(`<td>${shortenedString}</td>`);
 
         tableData.push(`<td>${result.country}</td>`);
@@ -201,4 +202,24 @@ function createResultsTable(apiResults, fullAPI) {
 
     document.getElementById("data").innerHTML = `<table id="resultsTable">${pagination}${tableHeaders}${tableRows}</table>`;
 
+}
+
+function cleanUpDates(strToShorten) {
+    let shortenedString = strToShorten.substring(0, 10);
+    let shortStrLength = shortenedString.length;
+    let reorderedString = "";
+    console.log("Shortened date string : " + shortenedString)
+    reorderedString = reorderedString.concat(shortenedString[8]);
+    reorderedString = reorderedString.concat(shortenedString[9]);
+    reorderedString = reorderedString.concat(shortenedString[7]);
+    reorderedString = reorderedString.concat(shortenedString[5]);
+    reorderedString = reorderedString.concat(shortenedString[6]);
+    reorderedString = reorderedString.concat(shortenedString[4]);
+    reorderedString = reorderedString.concat(shortenedString[0]);
+    reorderedString = reorderedString.concat(shortenedString[1]);
+    reorderedString = reorderedString.concat(shortenedString[2]);
+    reorderedString = reorderedString.concat(shortenedString[3]);
+    console.log("reordered date string : " + reorderedString);
+  
+    return reorderedString;
 }
