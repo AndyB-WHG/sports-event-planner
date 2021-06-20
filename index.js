@@ -60,6 +60,8 @@ function continuationFunction(myContent, apiAddress) {
     // console.log("8. Page Length type : " + typeof pageLength);
     resultsTotal = myContent.count;
     itemsFetched += pageLength;
+    let fullAPI = [];
+    fullAPI = myContent;
     myContent = myContent.results;
     for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
         text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
@@ -103,7 +105,7 @@ function continuationFunction(myContent, apiAddress) {
     itemsFetched = 0; // resets the variable ready for the next search request.
     totalText = "";
 
-    createResultsTable(myContent);
+    createResultsTable(myContent, fullAPI);
 
 }
 
@@ -138,8 +140,18 @@ function retrieveChosenEventDetails() {
 
 }
 
-function createResultsTable(apiData) {
-    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name", "Country", "Label 1", "Label 2"];
+function generatePaginationButtons(previous, next) {
+    if (next && pevious) {
+        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`
+               `<button onclick="fetchAPIdata('${next}')">Next</button>`;
+    } else if (!next && pevious) {
+        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`;
+    } else if (next && !pevious) {
+        return `<button onclick="fetchAPIdata('${next}')">Previous</button>`;
+}
+
+function createResultsTable(apiResults, fullAPI) {
+    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name", "Country", "Type", "Sub Type"];
     let tableHeaders = [];
     let tableRows = [];
     let tableData = [];
@@ -148,7 +160,12 @@ function createResultsTable(apiData) {
         tableHeaders.push(`<th>${header}</th>`);
     });
 
-    apiData.forEach(result => {
+    let pagination;
+    if (fullAPI.previous || fullAPI.next) {
+        pagination = generatePaginationButtons(fullAPI.previous, fullAPI.next);
+    }
+
+    apiResults.forEach(result => {
         tableData.push(`<td>${result.title}</td>`);
         
         let strToShorten = result.start.toString();
