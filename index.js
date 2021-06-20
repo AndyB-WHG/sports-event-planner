@@ -141,13 +141,14 @@ function retrieveChosenEventDetails() {
 }
 
 function generatePaginationButtons(previous, next) {
-    if (next && pevious) {
+    if (next && previous) {
         return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`
-               `<button onclick="fetchAPIdata('${next}')">Next</button>`;
-    } else if (!next && pevious) {
+        `<button onclick="fetchAPIdata('${next}')">Next</button>`;
+    } else if (!next && previous) {
         return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`;
-    } else if (next && !pevious) {
-        return `<button onclick="fetchAPIdata('${next}')">Previous</button>`;
+    } else if (next && !previous) {
+        return `<button onclick="fetchAPIdata('${next}')">Next</button>`;
+    }
 }
 
 function createResultsTable(apiResults, fullAPI) {
@@ -161,25 +162,27 @@ function createResultsTable(apiResults, fullAPI) {
     });
 
     let pagination;
+    console.log("Previous url: " + fullAPI.previous)
+    console.log("Next url: " + fullAPI.next)
     if (fullAPI.previous || fullAPI.next) {
         pagination = generatePaginationButtons(fullAPI.previous, fullAPI.next);
     }
 
     apiResults.forEach(result => {
         tableData.push(`<td>${result.title}</td>`);
-        
+
         let strToShorten = result.start.toString();
-        let shortenedString = strToShorten.substring(0,10);
+        let shortenedString = strToShorten.substring(0, 10);
         tableData.push(`<td>${shortenedString}</td>`);
 
         strToShorten = result.end.toString();
-        shortenedString = strToShorten.substring(0,10);
+        shortenedString = strToShorten.substring(0, 10);
         tableData.push(`<td>${shortenedString}</td>`);
-        
-        strToShorten = result.place_hierarchies[0,0].toString();
-        shortenedString = strToShorten.substring(0,7);
+
+        strToShorten = result.place_hierarchies[0, 0].toString();
+        shortenedString = strToShorten.substring(0, 7);
         tableData.push(`<td>${shortenedString}</td>`);
-        
+
         tableData.push(`<td>${result.country}</td>`);
 
         for (i = 0, len = result.labels.length; i < len; i++) {
@@ -196,6 +199,6 @@ function createResultsTable(apiResults, fullAPI) {
 
 
 
-    document.getElementById("data").innerHTML = `<table id="resultsTable">${tableHeaders}${tableRows}</table>`;
+    document.getElementById("data").innerHTML = `<table id="resultsTable">${pagination}${tableHeaders}${tableRows}</table>`;
 
 }
