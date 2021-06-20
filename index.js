@@ -1,12 +1,14 @@
 var totalOptions = [];
-var totalText = [];
+var totalText = "";
 var resultsTotal;
 var pageLength;
 var itemsFetched = 0;
-const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-19&active.lte=2022-06-18&category=sports&local_rank.gte=40&limit=100&sort=rank";
+const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank";
 var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
+var initialPageLoad = "yes";
+const quickSearchLoadValue = 250;
 
 
 
@@ -15,18 +17,19 @@ const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 $(document).ready(function populateQuickSearchBox() {
     // APIaddress = initialAPIaddress;
     // console.log("1. " + initialAPIaddress)
-    fetchAPIdata(initialAPIaddress);
+    fetchAPIdata(initialAPIaddress, itemsFetched);
     // populateQuickSearchBox(initialAPIaddress);
+    console.log("1. Items Fetched: " + itemsFetched)
 });
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress) {
-    if (apiAddress != initialAPIaddress) {
-        // queryAddress = apiAddress;
-        // object.freeze(queryAddress);
-    }
+function fetchAPIdata(apiAddress, itemsFetched) {
+    // if (apiAddress != initialAPIaddress) {
+    //     queryAddress = apiAddress;
+    //     object.freeze(queryAddress);
+    // }
     console.log("2.5 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
@@ -40,22 +43,27 @@ function fetchAPIdata(apiAddress) {
             console.log(myContent);
             // console.log("3. " + myContent.results);
             // myContent = myContent;
-            continuationFunction(myContent, apiAddress);
+            continuationFunction(myContent, apiAddress, itemsFetched);
 
         });
+
+}
+
+function convertPlaceIDsToNames(placeID) {
 
 }
 
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent, apiAddress) {
+function continuationFunction(myContent, apiAddress, itemsFetched) {
     // console.log("3.5 Content before 'Count' (line20)" + myContent);
     // console.log("4. Count =" + myContent.count);
     var nextPage = myContent.next;
     // console.log("5. Next page address : " + nextPage);
     // console.log("6. Type of Next Page : " + typeof nextPage)
     pageLength = myContent.results.length;
+    console.log("3. Page Length = " + pageLength);
     // console.log("7. Page length : " + pageLength);
     // console.log("8. Page Length type : " + typeof pageLength);
     resultsTotal = myContent.count;
@@ -63,27 +71,35 @@ function continuationFunction(myContent, apiAddress) {
     let fullAPI = [];
     fullAPI = myContent;
     myContent = myContent.results;
+    console.log("Full API : " + fullAPI);
+    console.log("myContent : " + myContent);
     for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
         text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
         options.push(myContent[i].title);
     }
 
-    // console.log("11. Items fetched : " + itemsFetched);
-    // console.log("12. Total results : " + resultsTotal);
+    console.log("4. Text : " + text);
+    console.log("11. Items fetched : " + itemsFetched);
+    console.log("12. Total results : " + resultsTotal);
     totalText = totalText.concat(text);
-    // document.getElementById("data").innerHTML = totalText;
+    console.log("Total Text : " + totalText);
+    document.getElementById("map").innerHTML = totalText;
 
     // localStorage.setItem('apiData', options);
 
-    if (itemsFetched < resultsTotal && itemsFetched < 50) {
+    if (itemsFetched <= 50) {
+        createResultsTable(myContent, fullAPI);
+    }
+
+    if (itemsFetched < resultsTotal && itemsFetched < quickSearchLoadValue) {
         // console.log("13. Next Page address : " + nextPage);
         // console.log("14. " + nextPage);
-        fetchAPIdata(nextPage);
+        fetchAPIdata(nextPage, itemsFetched);
     }
 
     // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
 
-    if (apiAddress === initialAPIaddress) {
+    if (initialPageLoad === "yes") {
 
         // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results 
         // of the initial API request to give potential events for the user to select from or ignore as required.
@@ -99,19 +115,17 @@ function continuationFunction(myContent, apiAddress) {
 
     }
 
-
-    // document.getElementById("data").innerHTML = totalText;
-
-    itemsFetched = 0; // resets the variable ready for the next search request.
-    totalText = "";
-
-    createResultsTable(myContent, fullAPI);
-
+    if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue) {
+        document.getElementById("map").innerHTML = totalText;
+        itemsFetched = 0; // resets the variable ready for the next search request.
+        totalText = "";
+    }
 }
 
 // Get the text typed into the 'Quick Search' box by the User (happens when the User clicks the 'Search Button' in the Nav Bar).
 
 function retrieveChosenEventDetails() {
+    initialPageLoad = "no";
     var searchItem = document.getElementById("quick-search-input-box").value;
     console.log("4. User Search Request: " + searchItem);
     var d = new Date();
@@ -182,7 +196,7 @@ function createResultsTable(apiResults, fullAPI) {
         tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = result.end.toString();
-        reorderedString = cleanUpDates (strToShorten);
+        reorderedString = cleanUpDates(strToShorten);
         tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = result.place_hierarchies[0, 0].toString();
@@ -196,7 +210,7 @@ function createResultsTable(apiResults, fullAPI) {
                 tableData.push(`<td>${result.labels[i]}</td>`);
             }
         }
-        
+
         tableRows.push(`<tr>${tableData}</tr>`);
 
         tableData = [];
@@ -224,6 +238,6 @@ function cleanUpDates(strToShorten) {
     reorderedString = reorderedString.concat(shortenedString[2]);
     reorderedString = reorderedString.concat(shortenedString[3]);
     // console.log("reordered date string : " + reorderedString);
-  
+
     return reorderedString;
 }
