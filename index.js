@@ -100,7 +100,7 @@ function continuationFunction(myContent, apiAddress) {
     }
 
 
-    document.getElementById("data").innerHTML = totalText;
+    // document.getElementById("data").innerHTML = totalText;
 
     itemsFetched = 0; // resets the variable ready for the next search request.
     totalText = "";
@@ -142,13 +142,16 @@ function retrieveChosenEventDetails() {
 
 function generatePaginationButtons(previous, next) {
     if (next && previous) {
-        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`
-        `<button onclick="fetchAPIdata('${next}')">Next</button>`;
+        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>
+                <button onclick="fetchAPIdata('${next}')">Next</button>`;
     } else if (!next && previous) {
         return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`;
     } else if (next && !previous) {
         return `<button onclick="fetchAPIdata('${next}')">Next</button>`;
-    }
+    } 
+    // else if (!next && !previous) {
+    //     return ``;
+    // }
 }
 
 function createResultsTable(apiResults, fullAPI) {
@@ -181,18 +184,16 @@ function createResultsTable(apiResults, fullAPI) {
 
         strToShorten = result.place_hierarchies[0, 0].toString();
         shortenedString = strToShorten.substring(0, 7);
-
         tableData.push(`<td>${shortenedString}</td>`);
 
         tableData.push(`<td>${result.country}</td>`);
 
         for (i = 0, len = result.labels.length; i < len; i++) {
-
             if (result.labels[i] != "sport") {
                 tableData.push(`<td>${result.labels[i]}</td>`);
             }
         }
-
+        
         tableRows.push(`<tr>${tableData}</tr>`);
 
         tableData = [];
@@ -200,7 +201,7 @@ function createResultsTable(apiResults, fullAPI) {
 
 
 
-    document.getElementById("data").innerHTML = `<table id="resultsTable">${pagination}${tableHeaders}${tableRows}</table>`;
+    document.getElementById("data").innerHTML = `${pagination}<table id="resultsTable">${tableHeaders}${tableRows}</table>`;
 
 }
 
@@ -208,7 +209,7 @@ function cleanUpDates(strToShorten) {
     let shortenedString = strToShorten.substring(0, 10);
     let shortStrLength = shortenedString.length;
     let reorderedString = "";
-    console.log("Shortened date string : " + shortenedString)
+    // console.log("Shortened date string : " + shortenedString)
     reorderedString = reorderedString.concat(shortenedString[8]);
     reorderedString = reorderedString.concat(shortenedString[9]);
     reorderedString = reorderedString.concat(shortenedString[7]);
@@ -219,7 +220,7 @@ function cleanUpDates(strToShorten) {
     reorderedString = reorderedString.concat(shortenedString[1]);
     reorderedString = reorderedString.concat(shortenedString[2]);
     reorderedString = reorderedString.concat(shortenedString[3]);
-    console.log("reordered date string : " + reorderedString);
+    // console.log("reordered date string : " + reorderedString);
   
     return reorderedString;
 }
