@@ -150,9 +150,19 @@ function createResultsTable(apiData) {
 
     apiData.forEach(result => {
         tableData.push(`<td>${result.title}</td>`);
-        tableData.push(`<td>${result.start}</td>`);
-        tableData.push(`<td>${result.end}</td>`);
-        tableData.push(`<td>${result.place_hierarchies[0,0]}</td>`);
+        
+        let strToShorten = result.start.toString();
+        let shortenedString = strToShorten.substring(0,10);
+        tableData.push(`<td>${shortenedString}</td>`);
+
+        strToShorten = result.end.toString();
+        shortenedString = strToShorten.substring(0,10);
+        tableData.push(`<td>${shortenedString}</td>`);
+        
+        strToShorten = result.place_hierarchies[0,0].toString();
+        shortenedString = strToShorten.substring(0,7);
+        tableData.push(`<td>${shortenedString}</td>`);
+        
         tableData.push(`<td>${result.country}</td>`);
 
         for (i = 0, len = result.labels.length; i < len; i++) {
@@ -169,6 +179,6 @@ function createResultsTable(apiData) {
 
 
 
-    document.getElementById("data").innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
+    document.getElementById("data").innerHTML = `<table id="resultsTable">${tableHeaders}${tableRows}</table>`;
 
 }
