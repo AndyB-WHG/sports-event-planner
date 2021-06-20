@@ -136,6 +136,10 @@ td, th {
 }
 
 #resultsTable>tbody>tr>:nth-child(2), #resultsTable>tbody>tr>:nth-child(3){
+    text-align:center;
+}
+
+#resultsTable>tbody>tr>:nth-child(2), #resultsTable>tbody>tr>:nth-child(3){
     width:100px;
 }
 

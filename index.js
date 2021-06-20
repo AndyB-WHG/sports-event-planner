@@ -141,6 +141,8 @@ function retrieveChosenEventDetails() {
 }
 
 function generatePaginationButtons(previous, next) {
+    console.log("3. 'Next' variable = : " + next);
+    console.log("3. 'Previous' variable = : " + previous);
     if (next && previous) {
         return `<button onclick="fetchAPIdata('${previous}')">Previous</button>
                 <button onclick="fetchAPIdata('${next}')">Next</button>`;
@@ -148,14 +150,13 @@ function generatePaginationButtons(previous, next) {
         return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`;
     } else if (next && !previous) {
         return `<button onclick="fetchAPIdata('${next}')">Next</button>`;
-    } 
-    // else if (!next && !previous) {
-    //     return ``;
-    // }
+    } else {
+        return `<p>Nothing to see...</p>`;
+    }
 }
 
 function createResultsTable(apiResults, fullAPI) {
-    let tableKeys = ["Event Title", "Start Date", "End Date", "Place Name", "Country", "Type", "Sub Type"];
+    let tableKeys = ["Event Title", "Start Date  dd/mm/yyyy", "End Date  dd/mm/yyyy", "Place Name", "Country", "Type", "Sub Type"];
     let tableHeaders = [];
     let tableRows = [];
     let tableData = [];
@@ -169,6 +170,8 @@ function createResultsTable(apiResults, fullAPI) {
     console.log("Next url: " + fullAPI.next)
     if (fullAPI.previous || fullAPI.next) {
         pagination = generatePaginationButtons(fullAPI.previous, fullAPI.next);
+    } else {
+        pagination = `<p></p>`;
     }
 
     apiResults.forEach(result => {
@@ -201,7 +204,7 @@ function createResultsTable(apiResults, fullAPI) {
 
 
 
-    document.getElementById("data").innerHTML = `${pagination}<table id="resultsTable">${tableHeaders}${tableRows}</table>`;
+    document.getElementById("data").innerHTML = `${pagination}<table id="resultsTable">${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
 
 }
 
