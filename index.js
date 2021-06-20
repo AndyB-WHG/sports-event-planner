@@ -83,7 +83,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     console.log("12. Total results : " + resultsTotal);
     totalText = totalText.concat(text);
     console.log("Total Text : " + totalText);
-    document.getElementById("map").innerHTML = totalText;
+    // document.getElementById("map").innerHTML = totalText;
 
     // localStorage.setItem('apiData', options);
 
@@ -91,7 +91,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
         createResultsTable(myContent, fullAPI);
     }
 
-    if (itemsFetched < resultsTotal && itemsFetched < quickSearchLoadValue) {
+    if (itemsFetched < resultsTotal && itemsFetched < quickSearchLoadValue && initialPageLoad === "yes") {
         // console.log("13. Next Page address : " + nextPage);
         // console.log("14. " + nextPage);
         fetchAPIdata(nextPage, itemsFetched);
@@ -115,8 +115,8 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
 
     }
 
-    if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue) {
-        document.getElementById("map").innerHTML = totalText;
+    if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue || initialPageLoad === "no") {
+        // document.getElementById("map").innerHTML = totalText;
         itemsFetched = 0; // resets the variable ready for the next search request.
         totalText = "";
     }
@@ -158,12 +158,12 @@ function generatePaginationButtons(previous, next) {
     console.log("3. 'Next' variable = : " + next);
     console.log("3. 'Previous' variable = : " + previous);
     if (next && previous) {
-        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>
-                <button onclick="fetchAPIdata('${next}')">Next</button>`;
+        return `<button onclick="clickedPaginationButton('${previous}')">Previous</button>
+                <button onclick="clickedPaginationButton('${next}')">Next</button>`;
     } else if (!next && previous) {
-        return `<button onclick="fetchAPIdata('${previous}')">Previous</button>`;
+        return `<button onclick="clickedPaginationButton('${previous}')">Previous</button>`;
     } else if (next && !previous) {
-        return `<button onclick="fetchAPIdata('${next}')">Next</button>`;
+        return `<button onclick="clickedPaginationButton('${next}')">Next</button>`;
     } else {
         return `<p>Nothing to see...</p>`;
     }
@@ -218,7 +218,7 @@ function createResultsTable(apiResults, fullAPI) {
 
 
 
-    document.getElementById("data").innerHTML = `${pagination}<table id="resultsTable">${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
+    document.getElementById("data").innerHTML = `<div id=paginationButtons>${pagination}</div><table id="resultsTable">${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
 
 }
 
@@ -240,4 +240,10 @@ function cleanUpDates(strToShorten) {
     // console.log("reordered date string : " + reorderedString);
 
     return reorderedString;
+}
+
+function clickedPaginationButton (apiAddress) {
+    initialPageLoad = "no";
+    itemsFetched = 0;
+    fetchAPIdata (apiAddress, itemsFetched);
 }

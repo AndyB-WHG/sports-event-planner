@@ -16,7 +16,7 @@ body {
     width: 100%;
     margin-right: 100px;
     position: relative;
-    top: 2px;    
+    top: 2px;
 }
 
 .quick-search-button {
@@ -24,7 +24,8 @@ body {
     top: 1px;
 }
 
-.quick-search-box, .quick-search-button {
+.quick-search-box,
+.quick-search-button {
     float: right;
 }
 
@@ -38,7 +39,7 @@ header {
     display: block;
     text-align: center;
     width: 100%;
-    background:url("../images/stadium-hero-image.jpg") no-repeat left bottom;
+    background: url("../images/stadium-hero-image.jpg") no-repeat left bottom;
     background-size: cover;
     position: relative;
 }
@@ -48,7 +49,7 @@ header {
     text-align: center;
     background-color: #0101018e;
     display: inline-block;
-    padding-left: 10px;    
+    padding-left: 10px;
     padding-right: 10px;
     position: absolute;
     left: 65%;
@@ -60,7 +61,7 @@ header {
 #filters {
     padding-top: 5px;
     background-color: #f8f9fa;
-    
+
 }
 
 #filters .row {
@@ -80,11 +81,12 @@ header {
 
 .even {
     margin-left: 1%;
-    margin-right:2%;
+    margin-right: 2%;
     margin-bottom: 0.2em;
 }
 
-.filter-input, .submit-button {
+.filter-input,
+.submit-button {
     font-family: 'Play';
     width: 46%;
     display: inline-block;
@@ -100,12 +102,12 @@ header {
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     text-align: center;
 }
 
 .inline-div {
-    display:inline-block;
+    display: inline-block;
     height: 1.5em;
     padding-left: 0;
 }
@@ -123,29 +125,31 @@ header {
     /* table-layout: fixed; */
 }
 
-#resultsTable, td, tr, th {
+#resultsTable,
+td,
+tr,
+th {
     border: 1px solid black;
     margin-left: 2.5%;
-    
+
 }
 
-td, th {
+td,
+th {
     vertical-align: center;
     padding: 5px;
     /* border-bottom: 1px solid #ddd; */
 }
 
-#resultsTable>tbody>tr>:nth-child(2), #resultsTable>tbody>tr>:nth-child(3){
-    text-align:center;
+#resultsTable>tbody>tr>:nth-child(2),
+#resultsTable>tbody>tr>:nth-child(3) {
+    text-align: center;
 }
 
-#resultsTable>tbody>tr>:nth-child(2), #resultsTable>tbody>tr>:nth-child(3){
-    width:100px;
+#resultsTable>tbody>tr>:nth-child(2),
+#resultsTable>tbody>tr>:nth-child(3) {
+    width: 100px;
 }
-
-#resultsTable>tbody>tr>:nth-child(1) {
-    /* width:50%; */
-   }
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -157,27 +161,45 @@ tr:hover {
     text-decoration-style: double; */
     /* font-size:large; */
     font-weight: bold;
-    font-size: 0.98em;
+    font-size: 15.8px;
 }
 
-th, th:hover {
+th,
+th:hover {
     height: 5em;
     background-color: #d4323d;
     color: #fafafa;
 }
 
-#resultsTable>tr>:nth-child(2){
-    width:300px !important;
-    text-align:right;
-   }
+#resultsTable>tr>:nth-child(2) {
+    width: 300px !important;
+    text-align: right;
+}
+
+#paginationButtons>button {
+    background-color: #007bff;
+    color: #fafafa;
+    padding: 10px;
+    margin: 10px;
+    border: rgb(35, 43, 43);
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+
+}
+
+#paginationButtons {
+    margin-left: 25px;
+}
 
 @media (min-width: 992px) {
     .navbar-expand-lg {
-        justify-content: space-between;;
-}
+        justify-content: space-between;
+        ;
+    }
 }
 
-@media screen and (min-width:400px ) and (max-width:500px) {
+@media screen and (min-width:400px) and (max-width:500px) {
     .quick-search-button {
         display: block;
 
@@ -199,50 +221,57 @@ th, th:hover {
         width: 6.3em;
         left: 55%;
         top: 10%;
-    }    
-    .submit-button {
-        margin-left: 3px;
-        }
     }
 
+    .submit-button {
+        margin-left: 3px;
+    }
+}
+
 @media (min-width: 768px) {
-    .filter-input, .submit-button {
+
+    .filter-input,
+    .submit-button {
         width: 24%;
     }
+
     .odd {
         margin-left: 0;
     }
+
     .even {
         margin-right: 0;
         margin-left: 0;
     }
+
     .filter-section {
         margin-left: 2.5%;
         /* margin-right: 2%; */
     }
 
 }
+
 @media (min-width: 820px) {
     #quick-search-input-box {
-    width: 130%;
-    position: relative;
-    right: 100px;
+        width: 130%;
+        position: relative;
+        right: 100px;
     }
 }
 
 @media (min-width: 992px) {
     #quick-search-input-box {
-    width: 170%;
-    position: relative;
-    right: 228px;
+        width: 170%;
+        position: relative;
+        right: 228px;
     }
 }
 
 @media (min-width: 1200px) {
     #quick-search-input-box {
-    width: 200%;
-    position: relative;
-    right: 323px;
+        width: 200%;
+        position: relative;
+        right: 323px;
     }
 }
 
