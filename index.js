@@ -8,7 +8,7 @@ var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 var initialPageLoad = "yes";
-const quickSearchLoadValue = 250;
+const quickSearchLoadValue = 5000;
 
 
 
@@ -116,7 +116,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     }
 
     if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue || initialPageLoad === "no") {
-        // document.getElementById("map").innerHTML = totalText;
+        document.getElementById("map").innerHTML = totalText;
         itemsFetched = 0; // resets the variable ready for the next search request.
         totalText = "";
     }
