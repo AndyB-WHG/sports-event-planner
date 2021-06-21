@@ -219,6 +219,10 @@ function createResultsTable(apiResults, fullAPI) {
 
     // })
 
+    if (apiResults.results.length < 10) {
+        resultsTableSize = apiResults.results.length;
+    }
+
     for (i = 0; i < resultsTableSize; i++) {
         tableData.push(`<td>${apiResults[i].title}</td>`);
 
@@ -236,11 +240,11 @@ function createResultsTable(apiResults, fullAPI) {
 
         tableData.push(`<td>${apiResults[i].country}</td>`);
 
-        for (j = 0, len = apiResults[i].labels.length; j < len; j++) {
-            if (apiResults[i].labels[j] != "sport") {
-                tableData.push(`<td>${apiResults[i].labels[j]}</td>`);
+        apiResults[i].labels.forEach(label => {
+            if (label != "sport") {
+                tableData.push(`<td>${label}</td>`);
             }
-        }
+        })
 
         tableRows.push(`<tr>${tableData}</tr>`);
 
