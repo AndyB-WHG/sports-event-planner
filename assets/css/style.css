@@ -130,9 +130,34 @@ header {
     color: #fafafa;
 }
 
+#clear-filters-button {
+    float: right;
+    margin-right: 2.5%;
+    margin-top: 0.5%;
+
+}
+
+/* #paginationButtons>button {
+    background-color: #007bff;
+    color: #fafafa;
+    padding: 10px;
+    margin: 10px;
+    border: rgb(35, 43, 43);
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+
+} */
+
+#paginationButtons {
+    margin-top: 0.5%;
+    margin-left: 2.5%;
+}
+
 #resultsTable {
     width: 95%;
     /* table-layout: fixed; */
+    /* margin-top: 1%; */
 }
 
 #resultsTable,
@@ -186,23 +211,6 @@ th {
 #resultsTable>tr>:nth-child(2) {
     width: 300px !important;
     text-align: right;
-}
-
-/* #paginationButtons>button {
-    background-color: #007bff;
-    color: #fafafa;
-    padding: 10px;
-    margin: 10px;
-    border: rgb(35, 43, 43);
-    border-style: solid;
-    border-radius: 3px;
-    border-width: 1px;
-
-} */
-
-#paginationButtons {
-    margin-top: 15px;
-    margin-left: 2.5%;
 }
 
 @media (min-width: 992px) {

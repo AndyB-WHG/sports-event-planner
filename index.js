@@ -243,8 +243,68 @@ function cleanUpDates(strToShorten) {
     return reorderedString;
 }
 
-function clickedPaginationButton (apiAddress) {
+function clickedPaginationButton(apiAddress) {
     initialPageLoad = "no";
     itemsFetched = 0;
-    fetchAPIdata (apiAddress, itemsFetched);
+    fetchAPIdata(apiAddress, itemsFetched);
 }
+
+function buildFilterSearchQuery() {
+
+    let startDateFilter = "";
+    let endDateFilter = "";
+    let sportFilter = "";
+    let teamCompetitorFilter = "";
+    let competitionFilter = "";
+    let countryFilter = "";
+    let cityFilter = "";
+
+    if (document.getElementById("start-date-filter").value === "" &&
+        document.getElementById("end-date-filter").value === "" &&
+        document.getElementById("sport-filter").value === "" && document.getElementById("start-date-filter").value === "" &&
+        document.getElementById("team-competitor-filter").value === "" &&
+        document.getElementById("competition-filter").value === "" &&
+        document.getElementById("country-filter").value === "" &&
+        document.getElementById("city-filter").value === "") {
+
+        alert("Please enter a value in at least one Filter.")
+        // $('#myModal').modal(options);
+        // document.getElementById('id01').style.display='block' 
+        // document.getElementById('id01').class='w3-button w3-black';        
+    } else {
+
+        if (document.getElementById("start-date-filter").value != "") {
+            startDateFilter = document.getElementById("start-date-filter").value;
+            console.log("Start Date Filter value : " + startDateFilter);
+        }
+
+        if (document.getElementById("end-date-filter").value != "") {
+            endDateFilter = document.getElementById("end-date-filter").value;
+            console.log("End Date Filter value : " + endDateFilter);
+        }
+
+        if (document.getElementById("sport-filter").value != "") {
+            sportFilter = document.getElementById("sport-filter").value;
+            console.log("Sport Filter value : " + sportFilter);
+        }
+
+        if (document.getElementById("team-competitor-filter").value != "") {
+            teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
+            console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
+        }
+
+        if (document.getElementById("competition-filter").value != "") {
+            competitionFilter = document.getElementById("competition-filter").value;
+            console.log("Competition Filter value : " + competitionFilter);
+        }
+
+        if (document.getElementById("country-filter").value != "") {
+            countryFilter = document.getElementById("country-filter").value;
+            console.log("Country Filter value : " + countryFilter);
+        }
+
+        if (document.getElementById("city-filter").value != "") {
+            cityFilter = document.getElementById("city-filter").value;
+            console.log("City Filter value : " + cityFilter);
+        }
+}}
