@@ -8,7 +8,7 @@ var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 var initialPageLoad = "yes";
-const quickSearchLoadValue = 5000;
+const quickSearchLoadValue = 50;
 
 
 
