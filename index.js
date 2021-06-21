@@ -8,7 +8,8 @@ var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 var initialPageLoad = "yes";
-const quickSearchLoadValue = 50;
+const quickSearchLoadValue = 500;
+var resultsTableSize = 10;
 
 
 
@@ -73,9 +74,9 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     myContent = myContent.results;
     console.log("Full API : " + fullAPI);
     console.log("myContent : " + myContent);
-    for (i = 0, len = myContent.length, text = "", options = []; i < len; i++) {
-        text += myContent[i].title + "  : Rank - " + myContent[i].local_rank + "<br>";
-        options.push(myContent[i].title);
+    for (iter = 0, len = myContent.length, text = "", options = []; iter < len; iter++) {
+        text += myContent[iter].title + "  : Rank - " + myContent[iter].local_rank + "<br>";
+        options.push(myContent[iter].title);
     }
 
     console.log("4. Text : " + text);
@@ -116,7 +117,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     }
 
     if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue || initialPageLoad === "no") {
-        document.getElementById("map").innerHTML = totalText;
+        // document.getElementById("map").innerHTML = totalText;
         itemsFetched = 0; // resets the variable ready for the next search request.
         totalText = "";
     }
@@ -189,33 +190,66 @@ function createResultsTable(apiResults, fullAPI) {
         pagination = `<p></p>`;
     }
 
-    apiResults.forEach(result => {
-        tableData.push(`<td>${result.title}</td>`);
+    // apiResults.forEach(result => {
+    //     tableData.push(`<td>${result.title}</td>`);
 
-        let strToShorten = result.start.toString();
+    //     let strToShorten = result.start.toString();
+    //     reorderedString = cleanUpDates(strToShorten);
+    //     tableData.push(`<td>${reorderedString}</td>`);
+
+    //     strToShorten = result.end.toString();
+    //     reorderedString = cleanUpDates(strToShorten);
+    //     tableData.push(`<td>${reorderedString}</td>`);
+
+    //     strToShorten = result.place_hierarchies[0, 0].toString();
+    //     shortenedString = strToShorten.substring(0, 7);
+    //     tableData.push(`<td>${shortenedString}</td>`);
+
+    //     tableData.push(`<td>${result.country}</td>`);
+
+    //     for (i = 0, len = result.labels.length; i < len; i++) {
+    //         if (result.labels[i] != "sport") {
+    //             tableData.push(`<td>${result.labels[i]}</td>`);
+    //         }
+    //     }
+
+    //     tableRows.push(`<tr>${tableData}</tr>`);
+
+    //     tableData = [];
+
+    // })
+
+    for (i = 0; i < resultsTableSize; i++) {
+        tableData.push(`<td>${apiResults[i].title}</td>`);
+
+        let strToShorten = apiResults[i].start.toString();
         reorderedString = cleanUpDates(strToShorten);
         tableData.push(`<td>${reorderedString}</td>`);
 
-        strToShorten = result.end.toString();
+        strToShorten = apiResults[i].end.toString();
         reorderedString = cleanUpDates(strToShorten);
         tableData.push(`<td>${reorderedString}</td>`);
 
-        strToShorten = result.place_hierarchies[0, 0].toString();
+        strToShorten = apiResults[i].place_hierarchies[0, 0].toString();
         shortenedString = strToShorten.substring(0, 7);
         tableData.push(`<td>${shortenedString}</td>`);
 
-        tableData.push(`<td>${result.country}</td>`);
+        tableData.push(`<td>${apiResults[i].country}</td>`);
 
-        for (i = 0, len = result.labels.length; i < len; i++) {
-            if (result.labels[i] != "sport") {
-                tableData.push(`<td>${result.labels[i]}</td>`);
+        for (j = 0, len = apiResults[i].labels.length; j < len; j++) {
+            if (apiResults[i].labels[j] != "sport") {
+                tableData.push(`<td>${apiResults[i].labels[j]}</td>`);
             }
         }
 
         tableRows.push(`<tr>${tableData}</tr>`);
 
         tableData = [];
-    });
+
+    }
+
+
+
 
 
 
@@ -278,8 +312,8 @@ function buildFilterSearchQuery() {
 
         if (document.getElementById("start-date-filter").value != "") {
             startDateFilter = document.getElementById("start-date-filter").value;
-            let startDateDay = startDateFilter.substring(0,2);
-            let startDateMonth = startDateFilter.substring(3,5);
+            let startDateDay = startDateFilter.substring(0, 2);
+            let startDateMonth = startDateFilter.substring(3, 5);
             let startDateYear = startDateFilter.substring(6);
             let convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
             console.log("Converted Start Date Filter value : " + convertedStartDateFilter);
@@ -289,8 +323,8 @@ function buildFilterSearchQuery() {
 
         if (document.getElementById("end-date-filter").value != "") {
             endDateFilter = document.getElementById("end-date-filter").value;
-            let endDateDay = endDateFilter.substring(0,2);
-            let endDateMonth = endDateFilter.substring(3,5);
+            let endDateDay = endDateFilter.substring(0, 2);
+            let endDateMonth = endDateFilter.substring(3, 5);
             let endDateYear = endDateFilter.substring(6);
             let convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
             console.log("Converted End Date Filter value : " + convertedEndDateFilter);
@@ -342,7 +376,7 @@ function buildFilterSearchQuery() {
 
         console.log("Filter Query string : " + filterQueryString);
 
-        }
-        
+    }
+
 
 }
