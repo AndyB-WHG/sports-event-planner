@@ -219,8 +219,8 @@ function createResultsTable(apiResults, fullAPI) {
 
     // })
 
-    if (apiResults.results.length < 10) {
-        resultsTableSize = apiResults.results.length;
+    if (apiResults.length < 10) {
+        resultsTableSize = apiResults.length;
     }
 
     for (i = 0; i < resultsTableSize; i++) {
