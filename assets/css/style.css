@@ -156,7 +156,8 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #98c244;
+    background-color: #28a745; /* #007bff;    /*  #98c244; */
+    color: #fafafa;
     /* color: #3b2cc5;
     text-decoration-style: double; */
     /* font-size:large; */
@@ -176,7 +177,7 @@ th:hover {
     text-align: right;
 }
 
-#paginationButtons>button {
+/* #paginationButtons>button {
     background-color: #007bff;
     color: #fafafa;
     padding: 10px;
@@ -186,10 +187,11 @@ th:hover {
     border-radius: 3px;
     border-width: 1px;
 
-}
+} */
 
 #paginationButtons {
-    margin-left: 25px;
+    margin-top: 15px;
+    margin-left: 35px;
 }
 
 @media (min-width: 992px) {

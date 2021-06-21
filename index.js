@@ -133,6 +133,7 @@ function retrieveChosenEventDetails() {
     var currentMonth = d.getMonth() + 1;
     var currentYear = d.getFullYear();
     var nextYear = currentYear + 1;
+    itemsFetched = 0;
     console.log("4.1 Next Year : " + nextYear);
     console.log("5. Date: " + d);
     if (currentDay < 10) {
@@ -150,7 +151,7 @@ function retrieveChosenEventDetails() {
 
     console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiQueryAddress)
+    fetchAPIdata(apiQueryAddress, itemsFetched)
 
 }
 
@@ -158,12 +159,12 @@ function generatePaginationButtons(previous, next) {
     console.log("3. 'Next' variable = : " + next);
     console.log("3. 'Previous' variable = : " + previous);
     if (next && previous) {
-        return `<button onclick="clickedPaginationButton('${previous}')">Previous</button>
-                <button onclick="clickedPaginationButton('${next}')">Next</button>`;
+        return `<button class="btn btn-success mb-2" onclick="clickedPaginationButton('${previous}')">Previous</button>
+                <button class="btn btn-success mb-2" onclick="clickedPaginationButton('${next}')">Next</button>`;
     } else if (!next && previous) {
-        return `<button onclick="clickedPaginationButton('${previous}')">Previous</button>`;
+        return `<button class="btn btn-success mb-2" onclick="clickedPaginationButton('${previous}')">Previous</button>`;
     } else if (next && !previous) {
-        return `<button onclick="clickedPaginationButton('${next}')">Next</button>`;
+        return `<button class="btn btn-success mb-2" onclick="clickedPaginationButton('${next}')">Next</button>`;
     } else {
         return `<p>Nothing to see...</p>`;
     }
