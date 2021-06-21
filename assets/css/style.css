@@ -165,11 +165,12 @@ tr:hover {
     font-size: 15.8px;
 }
 
-th,
-th:hover {
+th {
     height: 5em;
     background-color: #d4323d;
     color: #fafafa;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 #resultsTable>tr>:nth-child(2) {
@@ -191,7 +192,7 @@ th:hover {
 
 #paginationButtons {
     margin-top: 15px;
-    margin-left: 35px;
+    margin-left: 2.5%;
 }
 
 @media (min-width: 992px) {
