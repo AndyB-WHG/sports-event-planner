@@ -250,9 +250,10 @@ function clickedPaginationButton(apiAddress) {
 }
 
 function buildFilterSearchQuery() {
-
     let startDateFilter = "";
     let endDateFilter = "";
+    let convertedStartDateFilter = "";
+    let convertedEndDateFilter = "";
     let sportFilter = "";
     let teamCompetitorFilter = "";
     let competitionFilter = "";
@@ -273,38 +274,75 @@ function buildFilterSearchQuery() {
         // document.getElementById('id01').class='w3-button w3-black';        
     } else {
 
+        let filterArray = [];
+
         if (document.getElementById("start-date-filter").value != "") {
             startDateFilter = document.getElementById("start-date-filter").value;
-            console.log("Start Date Filter value : " + startDateFilter);
+            let startDateDay = startDateFilter.substring(0,2);
+            let startDateMonth = startDateFilter.substring(3,5);
+            let startDateYear = startDateFilter.substring(6);
+            let convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
+            console.log("Converted Start Date Filter value : " + convertedStartDateFilter);
+            filterArray.push(convertedStartDateFilter);
+
         }
 
         if (document.getElementById("end-date-filter").value != "") {
             endDateFilter = document.getElementById("end-date-filter").value;
-            console.log("End Date Filter value : " + endDateFilter);
+            let endDateDay = endDateFilter.substring(0,2);
+            let endDateMonth = endDateFilter.substring(3,5);
+            let endDateYear = endDateFilter.substring(6);
+            let convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
+            console.log("Converted End Date Filter value : " + convertedEndDateFilter);
+            filterArray.push(convertedEndDateFilter);
         }
 
         if (document.getElementById("sport-filter").value != "") {
             sportFilter = document.getElementById("sport-filter").value;
             console.log("Sport Filter value : " + sportFilter);
+            filterArray.push(sportFilter);
         }
 
         if (document.getElementById("team-competitor-filter").value != "") {
             teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
             console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
+            filterArray.push(teamCompetitorFilter);
         }
 
         if (document.getElementById("competition-filter").value != "") {
             competitionFilter = document.getElementById("competition-filter").value;
             console.log("Competition Filter value : " + competitionFilter);
+            filterArray.push(competitionFilter);
         }
 
         if (document.getElementById("country-filter").value != "") {
             countryFilter = document.getElementById("country-filter").value;
             console.log("Country Filter value : " + countryFilter);
+            filterArray.push(countryFilter);
         }
 
         if (document.getElementById("city-filter").value != "") {
             cityFilter = document.getElementById("city-filter").value;
             console.log("City Filter value : " + cityFilter);
+            filterArray.push(cityFilter);
         }
-}}
+
+        // build API query string
+
+        // https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
+
+        let filterQueryString = baseAPIaddress;
+
+        filterArray.forEach(filterSelection => {
+            filterQueryString += filterSelection;
+            filterQueryString += '&';
+        })
+
+        filterQueryString += 'category=sports&local_rank.gte=40&limit=100&sort=rank';
+
+        console.log("Filter Query string : " + filterQueryString);
+
+        }
+        
+
+}
