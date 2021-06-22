@@ -20,19 +20,16 @@ $(document).ready(function populateQuickSearchBox() {
     // APIaddress = initialAPIaddress;
     // console.log("1. " + initialAPIaddress)
     let itemsFetched = 0;
-    let apiMaxResults = 0;
     fetchAPIdata(initialAPIaddress, itemsFetched);
     // populateQuickSearchBox(initialAPIaddress);
-    console.log("1. Items Fetched: " + itemsFetched)
-    if (itemsFetched > 10) {
-        fetchAPIdata(nextAPIaddress, itemsFetched, apiMaxResults);
-    }
+    console.log("1. Items Fetched: " + itemsFetched);
+    
 });
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress, itemsFetched) {
+function fetchAPIdata(apiAddress, itemsFetched, quickSearchLoadValue) {
     // if (initialPageLoad === "yes") {   // removed
     //     $("#quick-search-input-box").val("Loading......");
     // }  // removed
@@ -51,12 +48,9 @@ function fetchAPIdata(apiAddress, itemsFetched) {
             
         })
         .then((myContent) => {
-            console.log("2.5 response.json : " + myContent.results);
-            console.log("2.6 myContent = " + myContent);
             // console.log("3. " + myContent.results);
             // myContent = myContent;
             continuationFunction(myContent, apiAddress, itemsFetched);
-
         });
 
 }
@@ -68,6 +62,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     // console.log("3.5 Content before 'Count' (line20)" + myContent);
     // console.log("4. Count =" + myContent.count);
     var nextPage = myContent.next;
+    console.log(myContent);
     // console.log("5. Next page address : " + nextPage);
     // console.log("6. Type of Next Page : " + typeof nextPage)
     pageLength = myContent.results.length;
@@ -82,17 +77,13 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     // console.log("Full API : " + fullAPI); //removed
     // console.log("myContent : " + myContent); //removed
 
-    // Create list of options for 'Quick Search' input box then push them into the 'options' array. //removed
-
-    // for (iter = 0, len = myContent.length, text = "", options = []; iter < len; iter++) { //removed
-    //     text += myContent[iter].title + "  : Rank - " + myContent[iter].local_rank + "<br>"; //removed
-    //     options.push(myContent[iter].title);  //removed
-    // } //removed
+    
+    
 
     // console.log("4. Text : " + text);  //removed
     // console.log("11. Items fetched : " + itemsFetched);  //removed
     // console.log("12. Total results : " + resultsTotal);  //removed
-    // totalText = totalText.concat(text);  //removed
+   
     // console.log("Total Text : " + totalText);  //removed
     // document.getElementById("map").innerHTML = totalText;  //removed
 
@@ -106,6 +97,17 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     }
 
     itemsFetched += itemsFetched;
+
+    // addQuickSearchOptions;
+
+    // while (itemsFetched < quickSearchLoadValue && itemsFetched < myContent.count) {
+    //     fetchAPIdata(nextPage, itemsFetched, quickSearchLoadValue);
+    //     addQuickSearchOptions;
+    // } 
+
+    // Create list of options for 'Quick Search' input box then push them into the 'options' array. //removed
+
+     
 
     // }  //removed
 
@@ -144,6 +146,8 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     //     totalText = "";   //removed
     // }  //removed
 }
+
+
 
 function createResultsTable(myContent) {
     let tableKeys = ["Event Title", "Start Date  dd/mm/yyyy", "End Date  dd/mm/yyyy", "Place Name", "Country", "Type", "Sub Type"];
@@ -265,6 +269,33 @@ function cleanUpDates(strToShorten) {
 
     return reorderedString;
 }
+
+function addQuickSearchOptions() {
+    for (iter = 0, len = myContent.length, text = "", options = []; iter < len; iter++) { //removed
+        text += myContent[iter].title + "  : Rank - " + myContent[iter].local_rank + "<br>"; //removed
+        options.push(myContent[iter].title);  //removed
+    } //removed   
+    
+     totalText = totalText.concat(text);  //removed
+
+    // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
+
+    // if (initialPageLoad === "yes") {  //removed
+
+    // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
+    // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
+
+        $(function autocompleteQuickSearchBox() {  //removed
+            totalOptions = totalOptions.concat(options);  //removed
+            // console.log("10. Total Options are: " + totalOptions);  //removed
+            var quickSearchList = totalOptions;  //removed
+            $("#quick-search-input-box").autocomplete({  //removed
+                source: quickSearchList  //removed
+            });  //removed
+        });  //removed
+
+    }  //removed
+
 
 function clickedPaginationButton(apiAddress) {
     // initialPageLoad = "no";   //removed
