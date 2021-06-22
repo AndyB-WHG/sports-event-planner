@@ -10,6 +10,7 @@ const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 var initialPageLoad = "yes";
 const quickSearchLoadValue = 500;
 var resultsTableSize = 10;
+var itemsFetched = 0;
 
 
 
@@ -20,16 +21,16 @@ $(document).ready(function populateQuickSearchBox() {
     // APIaddress = initialAPIaddress;
     // console.log("1. " + initialAPIaddress)
     let itemsFetched = 0;
-    fetchAPIdata(initialAPIaddress, itemsFetched);
+    fetchAPIdata(initialAPIaddress);
     // populateQuickSearchBox(initialAPIaddress);
     console.log("1. Items Fetched: " + itemsFetched);
-    
+
 });
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress, itemsFetched, quickSearchLoadValue) {
+function fetchAPIdata(apiAddress) {
     // if (initialPageLoad === "yes") {   // removed
     //     $("#quick-search-input-box").val("Loading......");
     // }  // removed
@@ -40,17 +41,17 @@ function fetchAPIdata(apiAddress, itemsFetched, quickSearchLoadValue) {
     console.log("2.5 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
-                Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
+                Authorization: `Bearer w1Fryp6ndPrExYWAQc8Wr5Y8Sp4_4ac0cQFeFQks`
             }
         })
         .then(response => {
             return response.json();
-            
+
         })
         .then((myContent) => {
             // console.log("3. " + myContent.results);
             // myContent = myContent;
-            continuationFunction(myContent, apiAddress, itemsFetched);
+            continuationFunction(myContent);
         });
 
 }
@@ -58,7 +59,7 @@ function fetchAPIdata(apiAddress, itemsFetched, quickSearchLoadValue) {
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent, apiAddress, itemsFetched) {
+function continuationFunction(myContent) {
     // console.log("3.5 Content before 'Count' (line20)" + myContent);
     // console.log("4. Count =" + myContent.count);
     var nextPage = myContent.next;
@@ -69,21 +70,21 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
     console.log("3. Page Length = " + pageLength);
     // console.log("7. Page length : " + pageLength);
     // console.log("8. Page Length type : " + typeof pageLength);
-    // resultsTotal = myContent.count;       //removed
-    // itemsFetched += pageLength;           //removed
+    resultsTotal = myContent.count; //removed
+    itemsFetched += pageLength; //removed
     // let fullAPI = [];        //removed
     // fullAPI = myContent; //removed
     // myContent = myContent.results;
     // console.log("Full API : " + fullAPI); //removed
     // console.log("myContent : " + myContent); //removed
 
-    
-    
+
+
 
     // console.log("4. Text : " + text);  //removed
     // console.log("11. Items fetched : " + itemsFetched);  //removed
     // console.log("12. Total results : " + resultsTotal);  //removed
-   
+
     // console.log("Total Text : " + totalText);  //removed
     // document.getElementById("map").innerHTML = totalText;  //removed
 
@@ -96,9 +97,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
         createResultsTable(myContent);
     }
 
-    itemsFetched += itemsFetched;
-
-    // addQuickSearchOptions;
+    addQuickSearchOptions(myContent);
 
     // while (itemsFetched < quickSearchLoadValue && itemsFetched < myContent.count) {
     //     fetchAPIdata(nextPage, itemsFetched, quickSearchLoadValue);
@@ -107,7 +106,7 @@ function continuationFunction(myContent, apiAddress, itemsFetched) {
 
     // Create list of options for 'Quick Search' input box then push them into the 'options' array. //removed
 
-     
+
 
     // }  //removed
 
@@ -270,13 +269,14 @@ function cleanUpDates(strToShorten) {
     return reorderedString;
 }
 
-function addQuickSearchOptions() {
-    for (iter = 0, len = myContent.length, text = "", options = []; iter < len; iter++) { //removed
-        text += myContent[iter].title + "  : Rank - " + myContent[iter].local_rank + "<br>"; //removed
-        options.push(myContent[iter].title);  //removed
+function addQuickSearchOptions(myContent) {
+    for (iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { //removed
+        text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>"; //removed
+        options.push(myContent.results[iter].title); //removed
     } //removed   
-    
-     totalText = totalText.concat(text);  //removed
+
+    totalOptions = totalOptions.concat(options);
+    totalText = totalText.concat(text); //removed
 
     // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
 
@@ -285,17 +285,24 @@ function addQuickSearchOptions() {
     // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
     // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
 
-        $(function autocompleteQuickSearchBox() {  //removed
-            totalOptions = totalOptions.concat(options);  //removed
+    if (itemsFetched >= quickSearchLoadValue || itemsFetched >= resultsTotal) {
+
+        $(function autocompleteQuickSearchBox() { //removed
+             //removed
             // console.log("10. Total Options are: " + totalOptions);  //removed
-            var quickSearchList = totalOptions;  //removed
-            $("#quick-search-input-box").autocomplete({  //removed
-                source: quickSearchList  //removed
-            });  //removed
-        });  //removed
+            var quickSearchList = totalOptions; //removed
+            $("#quick-search-input-box").autocomplete({ //removed
+                source: quickSearchList //removed
+            }); //removed
+        }); //removed
 
-    }  //removed
+        $("#quick-search-input-box").val("");
 
+    } else {
+        fetchAPIdata(myContent.next);
+
+    } //removed
+}
 
 function clickedPaginationButton(apiAddress) {
     // initialPageLoad = "no";   //removed
