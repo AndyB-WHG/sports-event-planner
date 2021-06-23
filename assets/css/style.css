@@ -208,6 +208,28 @@ th {
     padding-right: 7px;
 }
 
+footer li{
+    
+    display: inline;
+    /* text-decoration: none; */
+    text-align: center;
+}
+
+footer a{
+    color: #464241;
+    text-decoration: none;
+
+}
+
+footer a:hover{
+    color: #464241;
+    /* text-decoration: none; */
+}
+
+/* footer ul {
+    display: inline;
+} */
+
 #resultsTable>tr>:nth-child(2) {
     width: 300px !important;
     text-align: right;
