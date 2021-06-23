@@ -12,6 +12,12 @@ body {
     font-family: 'Exo', sans-serif;
 }
 
+/* #loader {
+    margin-right:100px;
+    height: 40px;
+    width: 40px;
+} */
+
 #quick-search-input-box {
     width: 100%;
     margin-right: 100px;

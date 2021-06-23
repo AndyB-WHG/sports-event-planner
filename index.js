@@ -8,7 +8,7 @@ var APIaddress = "";
 var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
 var initialPageLoad = "yes";
-const quickSearchLoadValue = 500;
+const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
 var itemsFetched = 0;
 
@@ -16,21 +16,28 @@ var itemsFetched = 0;
 
 // 1. Connects to API when page is loaded.
 
-// $(document).ready(function populateQuickSearchBox() {
-//     $("#quick-search-input-box").val("Loading......");
-//     // APIaddress = initialAPIaddress;
-//     // console.log("1. " + initialAPIaddress)
-//     let itemsFetched = 0;
-//     fetchAPIdata(initialAPIaddress);
-//     // populateQuickSearchBox(initialAPIaddress);
-//     console.log("1. Items Fetched: " + itemsFetched);
+$(document).ready(function () {
+    $("#quick-search-button-wrapper").html(
+        `<div id="loader">
+            <img src="assets/images/loading.gif" alt="loading..." />
+          </div>`);
+    $("#quick-search-input-box").val("Loading search options .... ");
+    // APIaddress = initialAPIaddress;
+    // console.log("1. " + initialAPIaddress)
+    let itemsFetched = 0;
+    var apiType = "events";
+    fetchAPIdata(initialAPIaddress, apiType);
+    // populateQuickSearchBox(initialAPIaddress);
+    console.log("1. Items Fetched: " + itemsFetched);
+    var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=50&sort=rank";
+    fetchAPIdata(quickSearchLoaderAPIaddress, apiType);
 
-// });
+});
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress) {
+function fetchAPIdata(apiAddress, apiType) {
     // if (initialPageLoad === "yes") {   // removed
     //     $("#quick-search-input-box").val("Loading......");
     // }  // removed
@@ -51,7 +58,7 @@ function fetchAPIdata(apiAddress) {
         .then((myContent) => {
             // console.log("3. " + myContent.results);
             // myContent = myContent;
-            continuationFunction(myContent);
+            continuationFunction(myContent, apiType);
         });
 
 }
@@ -59,11 +66,19 @@ function fetchAPIdata(apiAddress) {
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent) {
+function continuationFunction(myContent, apiType) {
     // console.log("3.5 Content before 'Count' (line20)" + myContent);
     // console.log("4. Count =" + myContent.count);
     var nextPage = myContent.next;
+    let APItype = apiType;
     console.log(myContent);
+    if (apiType = "places" && myContent === null) {
+        console.log("6. Places Array not found.");
+        return;
+    } else if (APItype === "places") {
+        return (myContent);
+    }
+
     // console.log("5. Next page address : " + nextPage);
     // console.log("6. Type of Next Page : " + typeof nextPage)
     pageLength = myContent.results.length;
@@ -95,9 +110,9 @@ function continuationFunction(myContent) {
 
     if (itemsFetched <= 10) {
         createResultsTable(myContent);
-    }
-
-    addQuickSearchOptions(myContent);
+    } else {
+        (addQuickSearchOptions(myContent))
+    };
 
     // while (itemsFetched < quickSearchLoadValue && itemsFetched < myContent.count) {
     //     fetchAPIdata(nextPage, itemsFetched, quickSearchLoadValue);
@@ -288,18 +303,21 @@ function addQuickSearchOptions(myContent) {
     if (itemsFetched >= quickSearchLoadValue || itemsFetched >= resultsTotal) {
 
         $(function autocompleteQuickSearchBox() { //removed
-             //removed
+            //removed
             // console.log("10. Total Options are: " + totalOptions);  //removed
             var quickSearchList = totalOptions; //removed
             $("#quick-search-input-box").autocomplete({ //removed
                 source: quickSearchList //removed
             }); //removed
         }); //removed
-
+        $("#quick-search-button-wrapper").html(
+            `<button type="button" onclick="retrieveChosenEventDetails()" id="quick-search-button"
+              class="btn btn-success mb-2">Quick Search</button>`
+        );
         $("#quick-search-input-box").val("");
 
     } else {
-        fetchAPIdata(myContent.next);
+        fetchAPIdata(myContent.next, apiType="events");
 
     } //removed
 }
@@ -313,7 +331,7 @@ function clickedPaginationButton(apiAddress) {
 // Get the text typed into the 'Quick Search' box by the User (happens when the User clicks the 'Search Button' in the Nav Bar).
 
 function retrieveChosenEventDetails() {
-    initialPageLoad = "no";
+    // initialPageLoad = "no";
     var searchItem = document.getElementById("quick-search-input-box").value;
     console.log("4. User Search Request: " + searchItem);
     var d = new Date();
@@ -335,11 +353,11 @@ function retrieveChosenEventDetails() {
 
     //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
-    var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=50&q=" + searchItem + "&sort=rank";
+    var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=10&q=" + searchItem + "+&sort=rank";
 
     console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiQueryAddress, itemsFetched)
+    fetchAPIdata(apiQueryAddress, "places")
 
 }
 
@@ -348,15 +366,15 @@ function retrieveChosenEventDetails() {
 
 
 function buildFilterSearchQuery() {
-    let startDateFilter = "";
-    let endDateFilter = "";
-    let convertedStartDateFilter = "";
-    let convertedEndDateFilter = "";
-    let sportFilter = "";
-    let teamCompetitorFilter = "";
-    let competitionFilter = "";
-    let countryFilter = "";
-    let cityFilter = "";
+    var startDateFilter = "";
+    var endDateFilter = "";
+    var convertedStartDateFilter = "";
+    var convertedEndDateFilter = "";
+    var sportFilter = "";
+    var teamCompetitorFilter = "";
+    var competitionFilter = "";
+    var countryFilter = "";
+    var cityFilter = "";
 
     if (document.getElementById("start-date-filter").value === "" &&
         document.getElementById("end-date-filter").value === "" &&
@@ -376,59 +394,85 @@ function buildFilterSearchQuery() {
 
         if (document.getElementById("start-date-filter").value != "") {
             startDateFilter = document.getElementById("start-date-filter").value;
-            let startDateDay = startDateFilter.substring(0, 2);
-            let startDateMonth = startDateFilter.substring(3, 5);
-            let startDateYear = startDateFilter.substring(6);
-            let convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
+            var startDateDay = startDateFilter.substr(0, 2);
+            var startDateMonth = startDateFilter.substr(3, 2);
+            var startDateYear = startDateFilter.substr(6, 4);
+            var convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
             console.log("Converted Start Date Filter value : " + convertedStartDateFilter);
+
             filterArray.push(convertedStartDateFilter);
 
         }
 
         if (document.getElementById("end-date-filter").value != "") {
             endDateFilter = document.getElementById("end-date-filter").value;
-            let endDateDay = endDateFilter.substring(0, 2);
-            let endDateMonth = endDateFilter.substring(3, 5);
-            let endDateYear = endDateFilter.substring(6);
-            let convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
+            var endDateDay = endDateFilter.substring(0, 2);
+            var endDateMonth = endDateFilter.substring(3, 5);
+            var endDateYear = endDateFilter.substring(6);
+            var convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
             console.log("Converted End Date Filter value : " + convertedEndDateFilter);
             filterArray.push(convertedEndDateFilter);
         }
 
         if (document.getElementById("sport-filter").value != "") {
-            sportFilter = document.getElementById("sport-filter").value;
+            var sportFilter = document.getElementById("sport-filter").value;
             console.log("Sport Filter value : " + sportFilter);
+            sportFilter = 'label=' + sportFilter;
             filterArray.push(sportFilter);
         }
 
         if (document.getElementById("team-competitor-filter").value != "") {
-            teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
+            var teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
             console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
+            teamCompetitorFilter = '?=' + teamCompetitorFilter;
             filterArray.push(teamCompetitorFilter);
         }
 
         if (document.getElementById("competition-filter").value != "") {
-            competitionFilter = document.getElementById("competition-filter").value;
+            var competitionFilter = document.getElementById("competition-filter").value;
             console.log("Competition Filter value : " + competitionFilter);
+            competitionFilter = '?=' + competitionFilter;
             filterArray.push(competitionFilter);
         }
 
         if (document.getElementById("country-filter").value != "") {
             countryFilter = document.getElementById("country-filter").value;
-            console.log("Country Filter value : " + countryFilter);
-            filterArray.push(countryFilter);
+            var countryId = countryFilter.substr(0, 2);
+            console.log("Country Filter value : " + countryId);
+            countryId = 'country=' + countryId;
+            // countryId = countryId.toLowerCase();
+            filterArray.push(countryId);
         }
 
         if (document.getElementById("city-filter").value != "") {
-            cityFilter = document.getElementById("city-filter").value;
+            var cityFilter = document.getElementById("city-filter").value;
             console.log("City Filter value : " + cityFilter);
+            cityFilter = 'q=' + cityFilter;
             filterArray.push(cityFilter);
         }
+
+        var placesBaseAPIaddress = "https://api.predicthq.com/v1/places/?";
+        var queryURL = "";
+
+        if (countryId != "" && cityFilter != "") {
+            queryURL = placesBaseAPIaddress + countryId + "&" + cityFilter + '&limit=10';
+        } else if (countryId != "" && cityFilter === "") {
+            queryURL = placesBaseAPIaddress + countryId + '&limit=10';
+        } else if (countryId === "" && cityFilter != "") {
+            queryURL = placesBaseAPIaddress + cityFilter + '&limit=10';
+        }
+        let apiType = "places";
+        if (countryId != "" || cityFilter != "") {
+            fetchAPIdata("https://api.predicthq.com/v1/places/?country=GB", apiType);
+        }
+
+        // https://api.predicthq.com/v1/places/?country=GB&limit=10&q=london&type=metro
 
         // build API query string
 
         // https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
 
+        let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
         let filterQueryString = baseAPIaddress;
 
         filterArray.forEach(filterSelection => {
@@ -436,7 +480,7 @@ function buildFilterSearchQuery() {
             filterQueryString += '&';
         })
 
-        filterQueryString += 'category=sports&local_rank.gte=40&limit=100&sort=rank';
+        filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
 
         console.log("Filter Query string : " + filterQueryString);
 

@@ -1,29 +1,46 @@
-var placeID;
 
-fetch("https://api.predicthq.com/v1/places/?q=Nottingham,England", {
-  headers: {
-    Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
-  }
-})
-  .then(response => {return response.json();}) 
-  .then((myContent) => {
-    placeID = myContent.results[0].id;
-    return myContent.results[0].id;
-  }).then (function(placeID) {
-    console.log("PlaceID = " + placeID);
-    fetch("https://api.predicthq.com/v1/events/?place.scope=" + placeID + "&active.gte=2021-03-01&active.lte=2021-03-31&category=sports&sort=rank", {
-      headers: {
-        Authorization: `Bearer GVtsmjii14RZzzBNhgGypHC8k7CVwNoHrERr6Xqf`
-      }
-    })
-    .then(response => {return response.json();}) 
-    .then((myContent) => {
-      console.log(myContent);
-      myContent = myContent.results;  
-      console.log(myContent);
-      console.log(myContent.length);
-      for (i = 0, len = myContent.length, text=""; i < len; i++) {
-        text += myContent[i].title + "<br>";
-        document.getElementById("data").innerHTML = text; }
-    }   
-    )});
+
+// fetch("https://api.predicthq.com/v1/places/?q=Nottingham,England", {
+
+  $(document).ready(function () {
+    fetchAPIdata("https://api.predicthq.com/v1/places/?country=GB");
+});
+
+
+// 2. Handles API GET requests
+
+function fetchAPIdata(apiAddress) {
+    // if (initialPageLoad === "yes") {   // removed
+    //     $("#quick-search-input-box").val("Loading......");
+    // }  // removed
+    // if (apiAddress != initialAPIaddress) {
+    //     queryAddress = apiAddress;
+    //     object.freeze(queryAddress);
+    // }
+    // console.log("2.5 : " + apiAddress);
+    fetch(apiAddress, {
+            headers: {
+                Authorization: `Bearer w1Fryp6ndPrExYWAQc8Wr5Y8Sp4_4ac0cQFeFQks`
+            }
+        })
+        .then(response => {
+            return response.json();
+
+        })
+        .then((myContent) => {
+            // console.log("3. " + myContent.results);
+            // myContent = myContent;
+            continuationFunction(myContent);
+        });
+
+}
+
+// 3. fetchAPIdata function (see item 2.) dumps the API data into here.
+// It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
+
+function continuationFunction(myContent) {
+    // console.log("3.5 Content before 'Count' (line20)" + myContent);
+    // console.log("4. Count =" + myContent.count);
+    // var nextPage = myContent.next;
+    console.log(myContent);
+}
