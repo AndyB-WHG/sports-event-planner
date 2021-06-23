@@ -71,7 +71,6 @@ header {
 
 .filter-section {
     margin-top: 0.7em;
-
 }
 
 .odd {
@@ -116,9 +115,9 @@ header {
     margin-bottom: 3px;
 }
 
-.submit-button {
+/* .submit-button {
     margin-left: 7px;
-}
+} */
 
 #filter-submit-button {
     background-color: #28a745; 
@@ -132,8 +131,9 @@ header {
 
 #clear-filters-button {
     float: right;
-    margin-right: 2.5%;
-    margin-top: 0.5%;
+    margin-right: 3.25%;
+    margin-top: 1.0%;
+    margin-bottom: 1.5%;
 
 }
 
@@ -150,7 +150,7 @@ header {
 } */
 
 #paginationButtons {
-    margin-top: 0.5%;
+    margin-top: 1.0%;
     margin-left: 2.5%;
 }
 
@@ -202,10 +202,16 @@ tr:hover {
 
 th {
     height: 5em;
-    background-color: #d4323d;
+    background-color: #393837;
     color: #fafafa;
     padding-left: 7px;
     padding-right: 7px;
+}
+
+.social-media {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 footer li{
@@ -213,12 +219,13 @@ footer li{
     display: inline;
     /* text-decoration: none; */
     text-align: center;
+    margin: 10px;
 }
 
 footer a{
     color: #464241;
     text-decoration: none;
-
+    font-size: 23px;
 }
 
 footer a:hover{
@@ -266,9 +273,9 @@ footer a:hover{
         top: 10%;
     }
 
-    .submit-button {
+    /* .submit-button {
         margin-left: 3px;
-    }
+    } */
 }
 
 @media (min-width: 768px) {
@@ -334,4 +341,3 @@ footer a:hover{
         
     } */
 
-}

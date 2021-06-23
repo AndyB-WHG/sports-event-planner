@@ -16,16 +16,16 @@ var itemsFetched = 0;
 
 // 1. Connects to API when page is loaded.
 
-$(document).ready(function populateQuickSearchBox() {
-    $("#quick-search-input-box").val("Loading......");
-    // APIaddress = initialAPIaddress;
-    // console.log("1. " + initialAPIaddress)
-    let itemsFetched = 0;
-    fetchAPIdata(initialAPIaddress);
-    // populateQuickSearchBox(initialAPIaddress);
-    console.log("1. Items Fetched: " + itemsFetched);
+// $(document).ready(function populateQuickSearchBox() {
+//     $("#quick-search-input-box").val("Loading......");
+//     // APIaddress = initialAPIaddress;
+//     // console.log("1. " + initialAPIaddress)
+//     let itemsFetched = 0;
+//     fetchAPIdata(initialAPIaddress);
+//     // populateQuickSearchBox(initialAPIaddress);
+//     console.log("1. Items Fetched: " + itemsFetched);
 
-});
+// });
 
 
 // 2. Handles API GET requests
