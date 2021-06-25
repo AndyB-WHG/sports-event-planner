@@ -11,11 +11,9 @@ A live website can be found [here]( https://andyb-whg.github.io/sports-event-pla
 # Table of Contents
 - [1. UX](#ux)
   * [1.1. Strategy](#strategy)
-    + [Project Goals](#project-goals)
-      - [User Stories:](#user-stories)
-      - [User Expectations:](#user-expectations)
-      - [Trends of Modern Websites](#trends-of-modern-websites)
-      - [Strategy Table](#strategy-table)
+    - [Project Goals](#project-goals)
+    - [User Stories:](#user-stories)
+    - [Strategy Table](#strategy-table)
   * [1.2. Structure](#structure)
   * [1.3. Skeleton](#skeleton)
   * [1.4. Surface](#surface)
@@ -175,25 +173,28 @@ The bottom of the page provides standard / expected social media links to popula
 
 
 <a name="technologies-used"></a>
-## 3. Technologies Used
+# 3. Technologies Used
   [Go to the top](#table-of-contents)
 
-* [HTML5](https://en.wikipedia.org/wiki/HTML)
-  * The project uses HyperText Markup Language.
-* [CSS3](https://en.wikipedia.org/wiki/CSS)
-  * The project uses Cascading Style Sheets.
-* [Atom](https://atom.io/)
-  - The project uses Atom to code.
-* [Chrome](https://www.google.com/intl/en_uk/chrome/)
-  - The project uses Chrome to debug and test the source code using HTML5.
-* [Balsamiq](https://balsamiq.com/)
-  - Balsamiq was used to create the wireframes during the design process.
-* [Google Fonts](https://fonts.google.com/)
-  - Google fonts were used to import the "Roboto" font into the style.css file which is used on all pages throughout the project.
-* [GitHub](https://github.com/)
-  - GitHub was used to store the project's code after being pushed from Git.
-* [JS Fiddle](https://jsfiddle.net/)
-  - JS Fiddle was used as a playground to test all my code before committing.
+- [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5), [CSS3](https://en.wikipedia.org/wiki/CSS) and [Boostrap v.4.1](https://getbootstrap.com/docs/4.1/getting-started/introduction/) provide structure, styling and responsiveness to various viewports. 
+
+- [Balsamiq](https://balsamiq.com/) wireframes were used in the design and initial look of the site.
+
+- [Javascript](https://en.wikipedia.org/wiki/JavaScript) and [jQuery](https://en.wikipedia.org/wiki/JQuery) enable the site's user-interactivity functions.
+
+- The [PredictHQ.com](https://www.predicthq.com/?utm_campaign=Brand&utm_term=predicthq&utm_source=adwords&utm_medium=ppc&hsa_net=adwords&hsa_ver=3&hsa_grp=21054631146&hsa_tgt=kwd-922375241988&hsa_kw=predicthq&hsa_cam=339807546&hsa_ad=494263849564&hsa_src=g&hsa_acc=4773278510&hsa_mt=e&gclid=Cj0KCQjw_dWGBhDAARIsAMcYuJwqJuYQFVJoJ-D3d468HtAhRv5UgC78H6AQUcCC39L1yzf9OI8ZV-AaAt6TEALw_wcB) 'Events' and 'Places' API's provide the real-time data powering the Search and Results Table features.
+
+- The [Chrome](https://www.google.com/intl/en_uk/chrome/) web-browser was used to view and test the site through design and implementation.
+
+- The [Gitpod](https://www.gitpod.io/) IDE (integrated development environment) and [Github](https://github.com/Github) repository provided the platforms for developmernt and storage of the site.
+
+- [Google Fonts](https://fonts.google.com/) provided the 'Exo' and 'Play' fonts utilised within the site.
+
+
+
+
+
+
 
 <a name="testing"></a>
 # 4. Testing
