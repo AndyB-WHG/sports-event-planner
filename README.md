@@ -103,10 +103,12 @@ Three variations are provided as examples of differing screen size layouts, name
 
 ### Wire-frames
 Web browser view
+
 ![Desktop Wireframe](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/desktopWireframe.PNG)
 
 Mobile & Tablet browser view
-![Mobile & Table Wireframes](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/mobileTabletExtendedWireFrames2.PNG)
+
+![Mobile & Table Wireframes](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/mobileTabletExtendedWireFrames.PNG)
 
 
 
@@ -115,40 +117,35 @@ Mobile & Tablet browser view
   [Go to the top](#table-of-contents)
 
 ### Colours
-Please find the colours schemes that I used [here](https://coolors.co/34495e-ffffff-e74c3c-3a3a3a-fafafa).
+Colours used are:
+
+#28a745 (Green) - used on buttons to compliment the grass within the Hero Image.
+#393837 (Charcoal Grey) - implemented within the Table Header to blend with the Filter and Table text and to tie in with the darker section of the Hero Image but with a softer shade to be easier on the eye.  Also provides a clear differentiation between the filter and table sections.
+
 
 ### Typography
-I decided to use Roboto as my font of choice with sans serf as my backup font for browsers that might not support Roboto.
+Font family for the majority of the site is 'Exo'.  
+The only exceptions are the Filter Buttons which are styled using the 'Play' font to provide contrast and interest against the Table section.
 
 <a name="features"></a>
 # 2. Features
   [Go to the top](#table-of-contents)
 
-### All pages:
-- Navigation bar is placed at the top of the screen, for ease of use and consistency. It has a hover effect and changes colour to improve the user experience. The page that you have selected also highlights red so the user knows exactly which page they are on.
-- Social media links, - all links are placed at the bottom of each page in the footer. All links open in a new tab.
+### Header Section:
+- Company Brand - placed prominently at top left.
+- Quick Search Input Box - prompts users to search for a team or competition of interest.  Aids first time visitors providing an easy, intuitive first step.
+- Quick Search button - highlighted in green for subconscious positive affirmation of use.
+- Loading GIF - appears during initial page load whilst suggestions are loaded from the linked API - suggestions then populate the Quick Search Input Box to help the user with potential searches.
 - Logo/text - a Sir Alex Ferguson logo is also placed on the top right of each page. This gives the context that the website is about him.
 
-### Landing page:
-- Main image - a large image that shows who the website is about.
-- Summary - a summary of what Sir Alex achieved.
-- Video - an embedded tribute video from youtube that gives the user the multimedia experience. This helps the user to be engaged with the website.
+### Hero Image Section:
+- Emotive atmospheric image of a packed sports stadium used to invoke positivity, excitement and urgency.
+- 'Call-Out' message both informs the user of the website's purpose whilst promoting immediate action.
 
-### Career page:
-- Overall statistics - a small bordered box that shows his managerial career stats.
-- Timeline - this element shows his career in a chronological experience. Reading from the top (when he started his career) to the bottom (when he finishes his career). This section tells you which clubs he has managed and a summary of what he achieved.
-- Club logos - These images add a visual to UI and improving UX as it's not just text on the page.
+### Filter Section
 
-### Testimonials page:
-- Card style view - this gives the user an easy to read card view that breaks information down into small sections. The user can read from card to card.
-- Card images - all images are of the same size, giving the UI consistency. This also gives the context of who the quote was from.
-- Card quotes - short quotes about Sir Alex admiring him. These quotes are from players who played under him and other managers giving credit.
+- Seven filter buttons give the user the ability the narrow and refine searches.  Searches extend 
 
-### Gallery page:
-- Collage images - these images are placed in a collage design. This allows me to place multiple sized images to the given screen size. The images show the success and happiness he had in the game.
-
-### Contact page:
-- Contact form - this gives the user the ability to message me for any issues they are having with the site, any suggestions of improvement and to give their opinions on any other manager that could potentially take his place.
 
 <a name="technologies-used"></a>
 ## 3. Technologies Used
