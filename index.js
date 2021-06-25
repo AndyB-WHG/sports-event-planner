@@ -2,11 +2,10 @@ var totalOptions = [];
 var totalText = "";
 var resultsTotal;
 var pageLength;
-// var itemsFetched = 0;
 const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=10&sort=rank";
 var APIaddress = "";
 var nextPage = "";
-const baseAPIaddress = "https://api.predicthq.com/v1/events/?"
+const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
 var initialPageLoad = "yes";
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
@@ -22,12 +21,9 @@ $(document).ready(function () {
             <img src="assets/images/loading.gif" alt="loading..." />
           </div>`);
     $("#quick-search-input-box").val("Loading search options .... ");
-    // APIaddress = initialAPIaddress;
-    // console.log("1. " + initialAPIaddress)
     let itemsFetched = 0;
     var apiType = "events";
     fetchAPIdata(initialAPIaddress, apiType);
-    // populateQuickSearchBox(initialAPIaddress);
     console.log("1. Items Fetched: " + itemsFetched);
     var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=50&sort=rank";
     fetchAPIdata(quickSearchLoaderAPIaddress, apiType);
@@ -38,13 +34,6 @@ $(document).ready(function () {
 // 2. Handles API GET requests
 
 function fetchAPIdata(apiAddress, apiType) {
-    // if (initialPageLoad === "yes") {   // removed
-    //     $("#quick-search-input-box").val("Loading......");
-    // }  // removed
-    // if (apiAddress != initialAPIaddress) {
-    //     queryAddress = apiAddress;
-    //     object.freeze(queryAddress);
-    // }
     console.log("2.5 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
@@ -56,8 +45,6 @@ function fetchAPIdata(apiAddress, apiType) {
 
         })
         .then((myContent) => {
-            // console.log("3. " + myContent.results);
-            // myContent = myContent;
             continuationFunction(myContent, apiType);
         });
 
@@ -67,26 +54,18 @@ function fetchAPIdata(apiAddress, apiType) {
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
 function continuationFunction(myContent, apiType) {
-    // console.log("3.5 Content before 'Count' (line20)" + myContent);
-    // console.log("4. Count =" + myContent.count);
-    var nextPage = myContent.next;
     let APItype = apiType;
     console.log(myContent);
-    if (apiType = "places" && myContent === null) {
+    if (apiType === "places" && myContent === null) {
         console.log("6. Places Array not found.");
         return;
     } else if (APItype === "places") {
         return (myContent);
     }
-
-    // console.log("5. Next page address : " + nextPage);
-    // console.log("6. Type of Next Page : " + typeof nextPage)
     pageLength = myContent.results.length;
     console.log("3. Page Length = " + pageLength);
-    // console.log("7. Page length : " + pageLength);
-    // console.log("8. Page Length type : " + typeof pageLength);
-    resultsTotal = myContent.count; //removed
-    itemsFetched += pageLength; //removed
+    resultsTotal = myContent.count; 
+    itemsFetched += pageLength; 
     // let fullAPI = [];        //removed
     // fullAPI = myContent; //removed
     // myContent = myContent.results;
@@ -111,8 +90,8 @@ function continuationFunction(myContent, apiType) {
     if (itemsFetched <= 10) {
         createResultsTable(myContent);
     } else {
-        (addQuickSearchOptions(myContent))
-    };
+        (addQuickSearchOptions(myContent));
+    }
 
     // while (itemsFetched < quickSearchLoadValue && itemsFetched < myContent.count) {
     //     fetchAPIdata(nextPage, itemsFetched, quickSearchLoadValue);
@@ -174,43 +153,15 @@ function createResultsTable(myContent) {
     });
 
     let pagination;
-    console.log("Previous url: " + myContent.previous)
-    console.log("Next url: " + myContent.next)
+    console.log("Previous url: " + myContent.previous);
+    console.log("Next url: " + myContent.next);
     if (myContent.previous || myContent.next) {
         pagination = generatePaginationButtons(myContent.previous, myContent.next);
     } else {
         pagination = `<p></p>`;
     }
 
-    // apiResults.forEach(result => {
-    //     tableData.push(`<td>${result.title}</td>`);
-
-    //     let strToShorten = result.start.toString();
-    //     reorderedString = cleanUpDates(strToShorten);
-    //     tableData.push(`<td>${reorderedString}</td>`);
-
-    //     strToShorten = result.end.toString();
-    //     reorderedString = cleanUpDates(strToShorten);
-    //     tableData.push(`<td>${reorderedString}</td>`);
-
-    //     strToShorten = result.place_hierarchies[0, 0].toString();
-    //     shortenedString = strToShorten.substring(0, 7);
-    //     tableData.push(`<td>${shortenedString}</td>`);
-
-    //     tableData.push(`<td>${result.country}</td>`);
-
-    //     for (i = 0, len = result.labels.length; i < len; i++) {
-    //         if (result.labels[i] != "sport") {
-    //             tableData.push(`<td>${result.labels[i]}</td>`);
-    //         }
-    //     }
-
-    //     tableRows.push(`<tr>${tableData}</tr>`);
-
-    //     tableData = [];
-
-    // })
-
+  
     if (myContent.results.length < 10) {
         resultsTableSize = myContent.results.length;
     }
@@ -236,7 +187,7 @@ function createResultsTable(myContent) {
             if (label != "sport") {
                 tableData.push(`<td>${label}</td>`);
             }
-        })
+        });
 
         tableRows.push(`<tr>${tableData}</tr>`);
 
@@ -246,7 +197,6 @@ function createResultsTable(myContent) {
 
     document.getElementById("data").innerHTML = `<div id=paginationButtons>${pagination}</div><table id="resultsTable">${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
 }
-
 
 function generatePaginationButtons(previous, next) {
     console.log("3. 'Next' variable = : " + next);
@@ -263,12 +213,11 @@ function generatePaginationButtons(previous, next) {
     }
 }
 
-
 function cleanUpDates(strToShorten) {
     let shortenedString = strToShorten.substring(0, 10);
-    let shortStrLength = shortenedString.length;
+ 
     let reorderedString = "";
-    // console.log("Shortened date string : " + shortenedString)
+
     reorderedString = reorderedString.concat(shortenedString[8]);
     reorderedString = reorderedString.concat(shortenedString[9]);
     reorderedString = reorderedString.concat(shortenedString[7]);
@@ -279,37 +228,34 @@ function cleanUpDates(strToShorten) {
     reorderedString = reorderedString.concat(shortenedString[1]);
     reorderedString = reorderedString.concat(shortenedString[2]);
     reorderedString = reorderedString.concat(shortenedString[3]);
-    // console.log("reordered date string : " + reorderedString);
 
     return reorderedString;
 }
 
 function addQuickSearchOptions(myContent) {
-    for (iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { //removed
-        text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>"; //removed
-        options.push(myContent.results[iter].title); //removed
-    } //removed   
+    for (iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { 
+        text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>"; 
+        options.push(myContent.results[iter].title); 
+    } 
 
     totalOptions = totalOptions.concat(options);
-    totalText = totalText.concat(text); //removed
+    totalText = totalText.concat(text); 
 
-    // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
+    // If the API data is part of the initial 'Page Loading' process then convert the results into selectable options in the 'Quick Search' box.
 
-    // if (initialPageLoad === "yes") {  //removed
+  
 
     // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
     // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
 
     if (itemsFetched >= quickSearchLoadValue || itemsFetched >= resultsTotal) {
 
-        $(function autocompleteQuickSearchBox() { //removed
-            //removed
-            // console.log("10. Total Options are: " + totalOptions);  //removed
-            var quickSearchList = totalOptions; //removed
-            $("#quick-search-input-box").autocomplete({ //removed
-                source: quickSearchList //removed
-            }); //removed
-        }); //removed
+        $(function autocompleteQuickSearchBox() { 
+            var quickSearchList = totalOptions; 
+            $("#quick-search-input-box").autocomplete({ 
+                source: quickSearchList 
+            }); 
+        }); 
         $("#quick-search-button-wrapper").html(
             `<button type="button" onclick="retrieveChosenEventDetails()" id="quick-search-button"
               class="btn btn-success mb-2">Quick Search</button>`
@@ -319,11 +265,10 @@ function addQuickSearchOptions(myContent) {
     } else {
         fetchAPIdata(myContent.next, apiType="events");
 
-    } //removed
+    } 
 }
 
 function clickedPaginationButton(apiAddress) {
-    // initialPageLoad = "no";   //removed
     itemsFetched = 0;
     fetchAPIdata(apiAddress, itemsFetched);
 }
@@ -331,7 +276,6 @@ function clickedPaginationButton(apiAddress) {
 // Get the text typed into the 'Quick Search' box by the User (happens when the User clicks the 'Search Button' in the Nav Bar).
 
 function retrieveChosenEventDetails() {
-    // initialPageLoad = "no";
     var searchItem = document.getElementById("quick-search-input-box").value;
     console.log("4. User Search Request: " + searchItem);
     var d = new Date();
@@ -357,12 +301,9 @@ function retrieveChosenEventDetails() {
 
     console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiQueryAddress, "places")
+    fetchAPIdata(apiQueryAddress, "places");
 
 }
-
-
-
 
 
 function buildFilterSearchQuery() {
@@ -384,7 +325,7 @@ function buildFilterSearchQuery() {
         document.getElementById("country-filter").value === "" &&
         document.getElementById("city-filter").value === "") {
 
-        alert("Please enter a value in at least one Filter.")
+        alert("Please enter a value in at least one Filter.");
         // $('#myModal').modal(options);
         // document.getElementById('id01').style.display='block' 
         // document.getElementById('id01').class='w3-button w3-black';        
@@ -397,7 +338,7 @@ function buildFilterSearchQuery() {
             var startDateDay = startDateFilter.substr(0, 2);
             var startDateMonth = startDateFilter.substr(3, 2);
             var startDateYear = startDateFilter.substr(6, 4);
-            var convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
+            convertedStartDateFilter = 'active.gte=' + startDateYear + '-' + startDateMonth + '-' + startDateDay;
             console.log("Converted Start Date Filter value : " + convertedStartDateFilter);
 
             filterArray.push(convertedStartDateFilter);
@@ -409,20 +350,20 @@ function buildFilterSearchQuery() {
             var endDateDay = endDateFilter.substring(0, 2);
             var endDateMonth = endDateFilter.substring(3, 5);
             var endDateYear = endDateFilter.substring(6);
-            var convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
+            convertedEndDateFilter = 'active.lte=' + endDateYear + '-' + endDateMonth + '-' + endDateDay;
             console.log("Converted End Date Filter value : " + convertedEndDateFilter);
             filterArray.push(convertedEndDateFilter);
         }
 
         if (document.getElementById("sport-filter").value != "") {
-            var sportFilter = document.getElementById("sport-filter").value;
+            sportFilter = document.getElementById("sport-filter").value;
             console.log("Sport Filter value : " + sportFilter);
             sportFilter = 'label=' + sportFilter;
             filterArray.push(sportFilter);
         }
 
         if (document.getElementById("team-competitor-filter").value != "") {
-            var teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
+            teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
             console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
             teamCompetitorFilter = '?=' + teamCompetitorFilter;
             filterArray.push(teamCompetitorFilter);
@@ -440,7 +381,6 @@ function buildFilterSearchQuery() {
             var countryId = countryFilter.substr(0, 2);
             console.log("Country Filter value : " + countryId);
             countryId = 'country=' + countryId;
-            // countryId = countryId.toLowerCase();
             filterArray.push(countryId);
         }
 
