@@ -6,7 +6,7 @@ This website is aimed at sports fans looking for events attend anywhere in the w
 
 A live website can be found [here]( https://andyb-whg.github.io/sports-event-planner/).
 
-![website preview](assets/images/responsive_screenshot.png)
+![website preview](documentation-assets/Am-I-ResponsiveDesignScreenshot.PNG)
 
 # Table of Contents
 - [1. UX](#ux)
