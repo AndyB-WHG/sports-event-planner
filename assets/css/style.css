@@ -12,12 +12,6 @@ body {
     font-family: 'Exo', sans-serif;
 }
 
-/* #loader {
-    margin-right:100px;
-    height: 40px;
-    width: 40px;
-} */
-
 #quick-search-input-box {
     width: 100%;
     margin-right: 100px;
@@ -72,7 +66,6 @@ header {
 
 #filters .row {
     margin-right: 0;
-    /* margin-left: -23px; */
 }
 
 .filter-section {
@@ -121,17 +114,11 @@ header {
     margin-bottom: 3px;
 }
 
-/* .submit-button {
-    margin-left: 7px;
-} */
-
 #filter-submit-button {
     background-color: #28a745; 
     border-style: solid;
     border-width: 1px;
     border-color: darkslategray;
-    /* background-color: #007bff;  
-    background-color: #98c244; */
     color: #fafafa;
 }
 
@@ -143,18 +130,6 @@ header {
 
 }
 
-/* #paginationButtons>button {
-    background-color: #007bff;
-    color: #fafafa;
-    padding: 10px;
-    margin: 10px;
-    border: rgb(35, 43, 43);
-    border-style: solid;
-    border-radius: 3px;
-    border-width: 1px;
-
-} */
-
 #paginationButtons {
     margin-top: 1.0%;
     margin-left: 2.5%;
@@ -162,8 +137,6 @@ header {
 
 #resultsTable {
     width: 95%;
-    /* table-layout: fixed; */
-    /* margin-top: 1%; */
 }
 
 #resultsTable,
@@ -175,11 +148,9 @@ th {
 
 }
 
-td,
-th {
+td, th {
     vertical-align: center;
     padding: 5px;
-    /* border-bottom: 1px solid #ddd; */
 }
 
 #resultsTable>tbody>tr>:nth-child(2),
@@ -197,11 +168,8 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #28a745; /* #007bff;    /*  #98c244; */
+    background-color: #28a745; 
     color: #fafafa;
-    /* color: #3b2cc5;
-    text-decoration-style: double; */
-    /* font-size:large; */
     font-weight: bold;
     font-size: 15.8px;
 }
@@ -223,7 +191,6 @@ th {
 footer li{
     
     display: inline;
-    /* text-decoration: none; */
     text-align: center;
     margin: 10px;
 }
@@ -236,12 +203,7 @@ footer a{
 
 footer a:hover{
     color: #464241;
-    /* text-decoration: none; */
 }
-
-/* footer ul {
-    display: inline;
-} */
 
 #resultsTable>tr>:nth-child(2) {
     width: 300px !important;
@@ -278,10 +240,6 @@ footer a:hover{
         left: 55%;
         top: 10%;
     }
-
-    /* .submit-button {
-        margin-left: 3px;
-    } */
 }
 
 @media (min-width: 768px) {
@@ -302,7 +260,6 @@ footer a:hover{
 
     .filter-section {
         margin-left: 2.5%;
-        /* margin-right: 2%; */
     }
 
 }
@@ -330,20 +287,3 @@ footer a:hover{
         right: 323px;
     }
 }
-
-/* @media (min-width: 992px) {
-    .filter-input, .submit-button {
-        width: 16%;
-    }
-    .odd {
-        margin-left: 0;
-    }
-    .even {
-        margin-right: 0;
-        margin-left: 0;
-    }
-    .filter-section {
-        margin-left: 2%;
-        
-    } */
-

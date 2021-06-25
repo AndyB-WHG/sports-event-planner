@@ -129,13 +129,13 @@ Colours used are:
 # 2. Features
   [Go to the top](#table-of-contents)
 
-### Header Section:
+### Header Section
 - Company Brand - placed prominently at top left.
 - Quick Search Input Box - prompts users to search for a team or competition of interest.  Aids first time visitors providing an easy, intuitive first step.
 - Quick Search button - highlighted in green for subconscious positive affirmation of use.
 - Loading GIF - appears during initial page load whilst suggestions are loaded from the linked API - suggestions then populate the Quick Search Input Box to help the user with potential searches.
 
-### Hero Image Section:
+### Hero Image Section
 - Emotive atmospheric image of a packed sports stadium used to invoke positivity, excitement and urgency.
 - 'Call-Out' message both informs the user of the website's purpose whilst promoting immediate action.
 
