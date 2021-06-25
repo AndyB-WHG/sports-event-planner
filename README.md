@@ -108,7 +108,7 @@ Web browser view
 
 Mobile & Tablet browser view
 
-![Mobile & Table Wireframes](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/mobileTabletExtendedWireFrames.PNG)
+![Mobile & Table Wireframes](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/mobileTabletExtendedWireFrames.png)
 
 
 
@@ -119,13 +119,13 @@ Mobile & Tablet browser view
 ### Colours
 Colours used are:
 
-#28a745 (Green) - used on buttons to compliment the grass within the Hero Image.
-#393837 (Charcoal Grey) - implemented within the Table Header to blend with the Filter and Table text and to tie in with the darker section of the Hero Image but with a softer shade to be easier on the eye.  Also provides a clear differentiation between the filter and table sections.
+- #28a745 (Green) - used on buttons to compliment the grass within the Hero Image.
+- #393837 (Charcoal Grey) - implemented within the Table Header to blend with the Filter and Table text and to tie in with the darker section of the Hero Image but with a softer shade to be easier on the eye.  Also provides a clear differentiation between the filter and table sections.
 
 
 ### Typography
-Font family for the majority of the site is 'Exo'.  
-The only exceptions are the Filter Buttons which are styled using the 'Play' font to provide contrast and interest against the Table section.
+- 'Exo' : used on the majority of the site to provide a mordern, positive feel.
+- 'Play' : Filter Button font to provide contrast and interest against the Table section.
 
 <a name="features"></a>
 # 2. Features
@@ -136,7 +136,6 @@ The only exceptions are the Filter Buttons which are styled using the 'Play' fon
 - Quick Search Input Box - prompts users to search for a team or competition of interest.  Aids first time visitors providing an easy, intuitive first step.
 - Quick Search button - highlighted in green for subconscious positive affirmation of use.
 - Loading GIF - appears during initial page load whilst suggestions are loaded from the linked API - suggestions then populate the Quick Search Input Box to help the user with potential searches.
-- Logo/text - a Sir Alex Ferguson logo is also placed on the top right of each page. This gives the context that the website is about him.
 
 ### Hero Image Section:
 - Emotive atmospheric image of a packed sports stadium used to invoke positivity, excitement and urgency.
@@ -144,7 +143,35 @@ The only exceptions are the Filter Buttons which are styled using the 'Play' fon
 
 ### Filter Section
 
-- Seven filter buttons give the user the ability the narrow and refine searches.  Searches extend 
+* Seven filter buttons provide the ability to narrow and refine searches between  :
+  - Start Date
+  - End Date
+  - Sport
+  - Team / Competitor
+  - Competition
+  - Country
+
+* 'Start Filter' button - coloured green as per the Quick Search button to indicate positive use. Takes the input from the seven Filter Buttons and feeds the requirements to the 'PredictHQ' external API resource.
+
+### Results Table Section
+
+- Seven Columns provide pertinent information to the user based on the search criteria provided :
+  - Event Title 	
+  - Start Date 
+  - End Date
+  - Place Name	
+  - Country	
+  - Type	
+  - Sub Type
+
+- Results are provided 10 rows at a time.
+- Pagination buttons are provided where the results yielded number greater than ten.  The user is able to move backwards and forwards as required.
+- Each line is highlighted in green as per the previous buttons, both to standardise the colour scheme and, for Developments Stages 2 and 3, to indicate that the line can be clicked to highlight and zoom in on the Google Map location.
+- 'Clear Filter' button : provides a simple, quick method to clear the filters ready for a subsequent search.
+
+### Footer / Social Media Section
+
+The bottom of the page provides standard / expected social media links to popular platforms including Youtube, Twitter, Facebook and Instagram.
 
 
 <a name="technologies-used"></a>
