@@ -36,9 +36,9 @@ A live website can be found [here]( https://andyb-whg.github.io/sports-event-pla
 ## 1.1. Strategy
   [Go to the top](#table-of-contents)
 
-### Project Goals
+### Project Goal
 
-The main aim of the site is to give users a super-efficient way to locate an event or potential range of sports events at the click of a button.  The user can either quick search for a general date ordered list of events or use the filter buttons to home in on more specific requirements.
+The main aim of the site is to give users a super-efficient way to locate an event or potential range of sports events, at the click of a button, to help plan a trip.
 
 ### User Stories:
  * As a user I want a simple, quick method of finding an event to attend.
@@ -85,11 +85,11 @@ Details of restaurants, hotels and places of interest to be added below the map 
 ## 1.2. Structure
   [Go to the top](#table-of-contents)
 
- - Site to be responsive on all Screen Sizes with information to be selectively added / removed dependent upon the screen size in use.
+ - Site to be responsive on all Screen Sizes with information selectively added / removed dependent upon the screen size in use.
  - ‘Nav Bar’ section placed prominently at the top of the page to act as an initial prompt for first time visitors.
  - Hero image of a sports event beneath the Quick Search section, with a ‘Call Out’ describing and explaining exactly what the site does for the user.
- - ‘Filter Section’ provided beneath the Hero Image. Placed lower down the page to prevent distractions for new users.  Returning and frequent users will be acquainted with the site and this more confident to move beyond the basic Nav Bar search option.
- - ‘Results Table’ is displayed beneath the filter section, initially listing the current most prestigious upcoming events across the world.  The table to display ten results at a time, with ‘pagination buttons’ provided should a search bring back more than ten events.
+ - ‘Filter Section’ provided beneath the Hero Image. Placed lower down the page to prevent distractions for new users.  Returning and frequent users will be acquainted with the site and thus more confident to move beyond the basic Nav Bar search option.
+ - A ‘Results Table’ is displayed beneath the filter section, initially listing the current most prestigious upcoming events across the world.  The table to display ten results at a time, with ‘pagination buttons’ provided should a search bring back more than ten events.
  - ‘Google Map’ (Stage 2 development) to be listed below the Results Table marking the listed event locations on the map.  
  - ‘Local Attractions’ (Stage 3 development) to be listed beneath the Google Map.  
  - Footer section at bottom of page displaying social media links to various websites including Twitter, Youtube, Instagram and Facebook.
@@ -99,14 +99,14 @@ Details of restaurants, hotels and places of interest to be added below the map 
   [Go to the top](#table-of-contents)
 
 [Balsamiq](https://balsamiq.com/) was used to create the following wireframes.  
-Three variations are provided as examples of differing screen size layouts, namely Mobile, Tablet and Desktop. 'Extended' versions of the mobile and tablet wireframes in order to show the full scrollable content. 
+Three variations are provided as examples of differing screen size layouts, namely Mobile, Tablet and Desktop. 'Extended' versions of the mobile and tablet wireframes are provided in order to show the full scrollable content post Stage 3. 
 
 ### Wire-frames
 Web browser view
-[![index.html-web](documentation-assets/wireframe-images/desktopWireframe.png)](documentation-assets/wireframe-images/desktopWireframe.png)
+![Desktop Wireframe](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/desktopWireframe.PNG)
 
 Mobile & Tablet browser view
-[![index.html-web](documentation-assets/wireframe-images/mobileTabletExtendedWireframes2.png)](documentation-assets/wireframe-images/mobileTabletExtendedWireframes2.png)
+![Mobile & Table Wireframes](https://github.com/AndyB-WHG/sports-event-planner/blob/master/documentation-assets/wireframe-images/mobileTabletExtendedWireFrames2.PNG)
 
 
 
