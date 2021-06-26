@@ -399,11 +399,14 @@ function buildFilterSearchQuery() {
         } else if (countryId === "" && cityFilter != "") {
             queryURL = placesBaseAPIaddress + cityFilter + '&limit=10';
         }
-        let apiType = "places";
+        
         if (countryId != "" || cityFilter != "") {
-            fetchAPIdata("https://api.predicthq.com/v1/places/?country=GB", apiType);
+            fetchAPIdata(queryURL, "places");
         }
 
+        console.log(myContent.results[0].name);
+        console.log(myContent.results[0].location[0]);
+        console.log(myContent.results[0].location[1]);
         // https://api.predicthq.com/v1/places/?country=GB&limit=10&q=london&type=metro
 
         // build API query string
