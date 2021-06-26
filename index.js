@@ -31,17 +31,19 @@ $(document).ready(function () {
 // 2. Handles API GET requests
 
 function fetchAPIdata(apiAddress, apiType) {
-    console.log("2.5 : " + apiAddress);
+    console.log("2.0 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
                 Authorization: `Bearer w1Fryp6ndPrExYWAQc8Wr5Y8Sp4_4ac0cQFeFQks`
             }
         })
         .then(response => {
+            console.log("2.1");
             return response.json();
 
         })
         .then((myContent) => {
+            console.log("2.2");
             continuationFunction(myContent, apiType);
         });
 
@@ -57,7 +59,10 @@ function continuationFunction(myContent, apiType) {
         console.log("6. Places Array not found.");
         return;
     } else if (APItype === "places") {
-        return (myContent);
+        console.log("7. Place Name waiting to be passed back to Filter Search Function : " + myContent.results[0].name);
+        console.log("12. PlaceArray = :" + placeArray);
+        return myContent;
+        
     }
     pageLength = myContent.results.length;
     console.log("3. Page Length = " + pageLength);
@@ -401,29 +406,36 @@ function buildFilterSearchQuery() {
         }
         
         if (countryId != "" || cityFilter != "") {
-            fetchAPIdata(queryURL, "places");
-        }
+            var placeArray = [];
+            placeArray = fetchAPIdata(queryURL, "places");
+        };
 
-        console.log(myContent.results[0].name);
-        console.log(myContent.results[0].location[0]);
-        console.log(myContent.results[0].location[1]);
+        // console.log(myContent.results[0].name);
+        // console.log(myContent.results[0].location[0]);
+        // console.log(myContent.results[0].location[1]);
         // https://api.predicthq.com/v1/places/?country=GB&limit=10&q=london&type=metro
 
         // build API query string
 
         // https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
 
-        let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
-        let filterQueryString = baseAPIaddress;
+        // let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
+        // let filterQueryString = baseAPIaddress;
 
-        filterArray.forEach(filterSelection => {
-            filterQueryString += filterSelection;
-            filterQueryString += '&';
-        });
+        // filterArray.forEach(filterSelection => {
+        //     filterQueryString += filterSelection;
+        //     filterQueryString += '&';
+        // });
 
-        filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
+        // console.log("9.0");
 
-        console.log("Filter Query string : " + filterQueryString);
+        // filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
+
+        console.log("10. Filter Query string : " + filterQueryString);
+
+        console.log("11. MyContent at end of Filter Function : " + myContent);
+
+        console.log("13. PlaceArray = :" + placeArray);
 
     }
 
