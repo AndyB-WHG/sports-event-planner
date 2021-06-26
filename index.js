@@ -361,8 +361,17 @@ function filtersContinuation(myContent) {
     var sportFilter = "";
     var teamCompetitorFilter = "";
     var competitionFilter = "";
+    var latitude = 0;
+    var longitude = 0;
 
-    console.log("9.7 - array passed to filter3 function", myContent.results[0].name);
+
+    latitude = myContent.results[0].location[0];
+    longitude = myContent.results[0].location[1];
+    var placeName = myContent.results[0].name;
+
+    console.log("Latitude : " + latitude);
+    console.log("Longitude : " + longitude);
+    console.log("Place Name : " + placeName);
 
     if (document.getElementById("start-date-filter").value === "" &&
         document.getElementById("end-date-filter").value === "" &&
@@ -422,6 +431,11 @@ function filtersContinuation(myContent) {
             console.log("Competition Filter value : " + competitionFilter);
             competitionFilter = '?=' + competitionFilter;
             filterArray.push(competitionFilter);
+        }
+
+        if (latitude != 0 && longitude !=0) {
+            latLongQuery = "location_around.origin=" + latitude + "%2C" + longitude + "&location_around.scale=30km";
+             filterArray.push(latLongQuery);
         }
 
         // build API query string
