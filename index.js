@@ -19,18 +19,19 @@ $(document).ready(function () {
           </div>`);
     $("#quick-search-input-box").val("Loading search options .... ");
     let itemsFetched = 0;
+    var initialPageLoad = "yes";
     var apiType = "events";
-    fetchAPIdata(initialAPIaddress, apiType);
+    fetchAPIdata(initialAPIaddress, apiType, initialPageLoad);
     console.log("1. Items Fetched: " + itemsFetched);
     var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=50&sort=rank";
-    fetchAPIdata(quickSearchLoaderAPIaddress, apiType);
+    fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad);
 
 });
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress, apiType) {
+function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
     console.log("2.0 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
@@ -44,7 +45,7 @@ function fetchAPIdata(apiAddress, apiType) {
         })
         .then((myContent) => {
             console.log("2.2");
-            continuationFunction(myContent, apiType);
+            continuationFunction(myContent, apiType, initialPageLoad);
         })
         .catch(error => console.log(error))
 
@@ -54,7 +55,7 @@ function fetchAPIdata(apiAddress, apiType) {
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent, apiType) {
+function continuationFunction(myContent, apiType, initialPageLoad) {
     let APItype = apiType;
     console.log(myContent);
     if (apiType === "places" && myContent === null) {
@@ -90,9 +91,9 @@ function continuationFunction(myContent, apiType) {
     // if (itemsFetched >= resultsTableSize) {  //removed
 
 
-    if (itemsFetched <= 10) {
+    if (itemsFetched <= 10 && apiType === "events") {
         createResultsTable(myContent);
-    } else {
+    } else if (initialPageLoad === "yes") {
         (addQuickSearchOptions(myContent));
     }
 
@@ -266,14 +267,14 @@ function addQuickSearchOptions(myContent) {
         $("#quick-search-input-box").val("");
 
     } else {
-        fetchAPIdata(myContent.next, "events");
+        fetchAPIdata(myContent.next, "events", "yes");
 
     }
 }
 
 function clickedPaginationButton(apiAddress) {
     itemsFetched = 0;
-    fetchAPIdata(apiAddress, itemsFetched);
+    fetchAPIdata(apiAddress, "events", "no");
 }
 
 // Get the text typed into the 'Quick Search' box by the User (happens when the User clicks the 'Search Button' in the Nav Bar).
@@ -304,7 +305,7 @@ function retrieveChosenEventDetails() {
 
     console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiQueryAddress, "events");
+    fetchAPIdata(apiQueryAddress, "events", "no");
 
 }
 
@@ -314,6 +315,7 @@ function buildFilterSearchQuery() {
     var countryFilter = "";
     var cityFilter = "";
     var countryId = "";
+    itemsFetched = 0;
 
 
     if (document.getElementById("country-filter").value != "") {
@@ -341,7 +343,7 @@ function buildFilterSearchQuery() {
     }
 
     if (countryId != "" || cityFilter != "") {
-        fetchAPIdata(queryURL, "places")
+        fetchAPIdata(queryURL, "places", "no")
     };
 
 }
@@ -353,7 +355,7 @@ function filtersContinuation(myContent) {
 
 
     console.log("9.5 - array passed to Filter function", myContent);
-    
+
     var startDateFilter = "";
     var endDateFilter = "";
     var convertedStartDateFilter = "";
@@ -363,10 +365,11 @@ function filtersContinuation(myContent) {
     var competitionFilter = "";
     var latitude = 0;
     var longitude = 0;
+    itemsFetched = 0;
 
 
-    latitude = myContent.results[0].location[0];
-    longitude = myContent.results[0].location[1];
+    latitude = myContent.results[0].location[1];
+    longitude = myContent.results[0].location[0];
     var placeName = myContent.results[0].name;
 
     console.log("Latitude : " + latitude);
@@ -433,9 +436,17 @@ function filtersContinuation(myContent) {
             filterArray.push(competitionFilter);
         }
 
-        if (latitude != 0 && longitude !=0) {
+        if (document.getElementById("country-filter").value != "") {
+            var countryFilter = document.getElementById("country-filter").value;
+            countryId = countryFilter.substr(0, 2);
+            console.log("Country Filter value : " + countryId);
+            countryId = 'country=' + countryId;
+            filterArray.push(countryId);
+        }
+
+        if (latitude != 0 && longitude != 0) {
             latLongQuery = "location_around.origin=" + latitude + "%2C" + longitude + "&location_around.scale=30km";
-             filterArray.push(latLongQuery);
+            filterArray.push(latLongQuery);
         }
 
         // build API query string
@@ -450,11 +461,17 @@ function filtersContinuation(myContent) {
             filterQueryString += '&';
         });
 
+        filterQueryString = filterQueryString + "category=sports&limit=10&sort=start";
         console.log("10. Filter Query string : " + filterQueryString);
+        
+        var filterResults = [];
 
+        myContent = [];
+        console.log("Content should now be cleared:", myContent)
 
+        fetchAPIdata(filterQueryString, "events", "no")
 
-
+        continuationFunction (myContent, "events", "no")
     }
 }
 
