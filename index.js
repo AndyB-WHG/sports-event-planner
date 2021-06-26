@@ -42,11 +42,12 @@ function fetchAPIdata(apiAddress, apiType) {
             return response.json();
 
         })
-        .catch(error => console.log(error))
         .then((myContent) => {
             console.log("2.2");
             continuationFunction(myContent, apiType);
-        });
+        })
+        .catch(error => console.log(error))
+
 
 }
 
@@ -61,14 +62,13 @@ function continuationFunction(myContent, apiType) {
         return;
     } else if (APItype === "places") {
         console.log("7. Place Name waiting to be passed back to Filter Search Function : " + myContent.results[0].name);
-        console.log("12. PlaceArray = :" + placeArray); 
-        return myContent;
-        
+        filtersContinuation(myContent)
+
     }
     pageLength = myContent.results.length;
     console.log("3. Page Length = " + pageLength);
-    resultsTotal = myContent.count; 
-    itemsFetched += pageLength; 
+    resultsTotal = myContent.count;
+    itemsFetched += pageLength;
     // let fullAPI = [];        //removed
     // fullAPI = myContent; //removed
     // myContent = myContent.results;
@@ -164,7 +164,7 @@ function createResultsTable(myContent) {
         pagination = `<p></p>`;
     }
 
-  
+
     // if (myContent.results.length < 10) {
     resultsTableSize = myContent.results.length;
     // }
@@ -218,7 +218,7 @@ function generatePaginationButtons(previous, next) {
 
 function cleanUpDates(strToShorten) {
     let shortenedString = strToShorten.substring(0, 10);
- 
+
     let reorderedString = "";
 
     reorderedString = reorderedString.concat(shortenedString[8]);
@@ -236,29 +236,29 @@ function cleanUpDates(strToShorten) {
 }
 
 function addQuickSearchOptions(myContent) {
-    for (var iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { 
-        text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>"; 
-        options.push(myContent.results[iter].title); 
-    } 
+    for (var iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) {
+        text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>";
+        options.push(myContent.results[iter].title);
+    }
 
     totalOptions = totalOptions.concat(options);
-    totalText = totalText.concat(text); 
+    totalText = totalText.concat(text);
 
     // If the API data is part of the initial 'Page Loading' process then convert the results into selectable options in the 'Quick Search' box.
 
-  
+
 
     // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
     // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
 
     if (itemsFetched >= quickSearchLoadValue || itemsFetched >= resultsTotal) {
 
-        $(function autocompleteQuickSearchBox() { 
-            var quickSearchList = totalOptions; 
-            $("#quick-search-input-box").autocomplete({ 
-                source: quickSearchList 
-            }); 
-        }); 
+        $(function autocompleteQuickSearchBox() {
+            var quickSearchList = totalOptions;
+            $("#quick-search-input-box").autocomplete({
+                source: quickSearchList
+            });
+        });
         $("#quick-search-button-wrapper").html(
             `<button type="button" onclick="retrieveChosenEventDetails()" id="quick-search-button"
               class="btn btn-success mb-2">Quick Search</button>`
@@ -268,7 +268,7 @@ function addQuickSearchOptions(myContent) {
     } else {
         fetchAPIdata(myContent.next, "events");
 
-    } 
+    }
 }
 
 function clickedPaginationButton(apiAddress) {
@@ -310,6 +310,50 @@ function retrieveChosenEventDetails() {
 
 
 function buildFilterSearchQuery() {
+
+    var countryFilter = "";
+    var cityFilter = "";
+    var countryId = "";
+
+
+    if (document.getElementById("country-filter").value != "") {
+        countryFilter = document.getElementById("country-filter").value;
+        countryId = countryFilter.substr(0, 2);
+        console.log("Country Filter value : " + countryId);
+        countryId = 'country=' + countryId;
+    }
+
+    if (document.getElementById("city-filter").value != "") {
+        var cityFilter = document.getElementById("city-filter").value;
+        console.log("City Filter value : " + cityFilter);
+        cityFilter = 'q=' + cityFilter;
+    }
+
+    var placesBaseAPIaddress = "https://api.predicthq.com/v1/places/?";
+    var queryURL = "";
+
+    if (countryId != "" && cityFilter != "") {
+        queryURL = placesBaseAPIaddress + countryId + "&" + cityFilter + '&limit=10';
+    } else if (countryId != "" && cityFilter === "") {
+        queryURL = placesBaseAPIaddress + countryId + '&limit=10';
+    } else if (countryId === "" && cityFilter != "") {
+        queryURL = placesBaseAPIaddress + cityFilter + '&limit=10';
+    }
+
+    if (countryId != "" || cityFilter != "") {
+        fetchAPIdata(queryURL, "places")
+    };
+
+}
+
+
+
+
+function filtersContinuation(myContent) {
+
+
+    console.log("9.5 - array passed to Filter function", myContent);
+    
     var startDateFilter = "";
     var endDateFilter = "";
     var convertedStartDateFilter = "";
@@ -317,9 +361,8 @@ function buildFilterSearchQuery() {
     var sportFilter = "";
     var teamCompetitorFilter = "";
     var competitionFilter = "";
-    var countryFilter = "";
-    var cityFilter = "";
-    var countryId = "";
+
+    console.log("9.7 - array passed to filter3 function", myContent.results[0].name);
 
     if (document.getElementById("start-date-filter").value === "" &&
         document.getElementById("end-date-filter").value === "" &&
@@ -332,7 +375,8 @@ function buildFilterSearchQuery() {
         alert("Please enter a value in at least one Filter.");
         // $('#myModal').modal(options);
         // document.getElementById('id01').style.display='block' 
-        // document.getElementById('id01').class='w3-button w3-black';        
+        // document.getElementById('id01').class='w3-button w3-black';   
+
     } else {
 
         let filterArray = [];
@@ -380,67 +424,24 @@ function buildFilterSearchQuery() {
             filterArray.push(competitionFilter);
         }
 
-        if (document.getElementById("country-filter").value != "") {
-            countryFilter = document.getElementById("country-filter").value;
-            countryId = countryFilter.substr(0, 2);
-            console.log("Country Filter value : " + countryId);
-            countryId = 'country=' + countryId;
-            filterArray.push(countryId);
-        }
-
-        if (document.getElementById("city-filter").value != "") {
-            var cityFilter = document.getElementById("city-filter").value;
-            console.log("City Filter value : " + cityFilter);
-            cityFilter = 'q=' + cityFilter;
-            filterArray.push(cityFilter);
-        }
-
-        var placesBaseAPIaddress = "https://api.predicthq.com/v1/places/?";
-        var queryURL = "";
-
-        if (countryId != "" && cityFilter != "") {
-            queryURL = placesBaseAPIaddress + countryId + "&" + cityFilter + '&limit=10';
-        } else if (countryId != "" && cityFilter === "") {
-            queryURL = placesBaseAPIaddress + countryId + '&limit=10';
-        } else if (countryId === "" && cityFilter != "") {
-            queryURL = placesBaseAPIaddress + cityFilter + '&limit=10';
-        }
-        
-        if (countryId != "" || cityFilter != "") {
-            var placeArray = [];
-            placeArray = fetchAPIdata(queryURL, "places");
-        };
-
-        // console.log(myContent.results[0].name);
-        // console.log(myContent.results[0].location[0]);
-        // console.log(myContent.results[0].location[1]);
-        // https://api.predicthq.com/v1/places/?country=GB&limit=10&q=london&type=metro
-
         // build API query string
 
-        // https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
+        // eg. https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
 
-        // let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
-        // let filterQueryString = baseAPIaddress;
+        let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
+        let filterQueryString = baseAPIaddress;
 
-        // filterArray.forEach(filterSelection => {
-        //     filterQueryString += filterSelection;
-        //     filterQueryString += '&';
-        // });
+        filterArray.forEach(filterSelection => {
+            filterQueryString += filterSelection;
+            filterQueryString += '&';
+        });
 
-        // console.log("9.0");
+        console.log("10. Filter Query string : " + filterQueryString);
 
-        // filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
 
-        // console.log("10. Filter Query string : " + filterQueryString);
 
-        // console.log("11. MyContent at end of Filter Function : " + myContent);
-
-        // console.log("13. PlaceArray = :" + placeArray);
 
     }
-
-
 }
 
 function convertPlaceIDsToNames(placeID) {
