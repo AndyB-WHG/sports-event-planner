@@ -3,10 +3,7 @@ var totalText = "";
 var resultsTotal;
 var pageLength;
 const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=10&sort=rank";
-var APIaddress = "";
-var nextPage = "";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
-var initialPageLoad = "yes";
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
 var itemsFetched = 0;
@@ -166,11 +163,11 @@ function createResultsTable(myContent) {
         resultsTableSize = myContent.results.length;
     }
 
-    for (i = 0; i < resultsTableSize; i++) {
+    for (var i = 0; i < resultsTableSize; i++) {
         tableData.push(`<td>${myContent.results[i].title}</td>`);
 
         let strToShorten = myContent.results[i].start.toString();
-        reorderedString = cleanUpDates(strToShorten);
+        var reorderedString = cleanUpDates(strToShorten);
         tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = myContent.results[i].end.toString();
@@ -178,7 +175,7 @@ function createResultsTable(myContent) {
         tableData.push(`<td>${reorderedString}</td>`);
 
         strToShorten = myContent.results[i].place_hierarchies[0, 0].toString();
-        shortenedString = strToShorten.substring(0, 7);
+        var shortenedString = strToShorten.substring(0, 7);
         tableData.push(`<td>${shortenedString}</td>`);
 
         tableData.push(`<td>${myContent.results[i].country}</td>`);
@@ -233,7 +230,7 @@ function cleanUpDates(strToShorten) {
 }
 
 function addQuickSearchOptions(myContent) {
-    for (iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { 
+    for (var iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) { 
         text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>"; 
         options.push(myContent.results[iter].title); 
     } 
@@ -263,7 +260,7 @@ function addQuickSearchOptions(myContent) {
         $("#quick-search-input-box").val("");
 
     } else {
-        fetchAPIdata(myContent.next, apiType="events");
+        fetchAPIdata(myContent.next, "events");
 
     } 
 }
@@ -316,6 +313,7 @@ function buildFilterSearchQuery() {
     var competitionFilter = "";
     var countryFilter = "";
     var cityFilter = "";
+    var countryId = "";
 
     if (document.getElementById("start-date-filter").value === "" &&
         document.getElementById("end-date-filter").value === "" &&
@@ -378,7 +376,7 @@ function buildFilterSearchQuery() {
 
         if (document.getElementById("country-filter").value != "") {
             countryFilter = document.getElementById("country-filter").value;
-            var countryId = countryFilter.substr(0, 2);
+            countryId = countryFilter.substr(0, 2);
             console.log("Country Filter value : " + countryId);
             countryId = 'country=' + countryId;
             filterArray.push(countryId);
@@ -418,7 +416,7 @@ function buildFilterSearchQuery() {
         filterArray.forEach(filterSelection => {
             filterQueryString += filterSelection;
             filterQueryString += '&';
-        })
+        });
 
         filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
 
