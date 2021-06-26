@@ -42,6 +42,7 @@ function fetchAPIdata(apiAddress, apiType) {
             return response.json();
 
         })
+        .catch(error => console.log(error))
         .then((myContent) => {
             console.log("2.2");
             continuationFunction(myContent, apiType);
@@ -60,7 +61,7 @@ function continuationFunction(myContent, apiType) {
         return;
     } else if (APItype === "places") {
         console.log("7. Place Name waiting to be passed back to Filter Search Function : " + myContent.results[0].name);
-        console.log("12. PlaceArray = :" + placeArray);
+        console.log("12. PlaceArray = :" + placeArray); 
         return myContent;
         
     }
@@ -431,11 +432,11 @@ function buildFilterSearchQuery() {
 
         // filterQueryString += 'category=sports&local_rank.gte=40&limit=10&sort=rank';
 
-        console.log("10. Filter Query string : " + filterQueryString);
+        // console.log("10. Filter Query string : " + filterQueryString);
 
-        console.log("11. MyContent at end of Filter Function : " + myContent);
+        // console.log("11. MyContent at end of Filter Function : " + myContent);
 
-        console.log("13. PlaceArray = :" + placeArray);
+        // console.log("13. PlaceArray = :" + placeArray);
 
     }
 
