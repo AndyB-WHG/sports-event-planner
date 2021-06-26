@@ -159,9 +159,9 @@ function createResultsTable(myContent) {
     }
 
   
-    if (myContent.results.length < 10) {
-        resultsTableSize = myContent.results.length;
-    }
+    // if (myContent.results.length < 10) {
+    resultsTableSize = myContent.results.length;
+    // }
 
     for (var i = 0; i < resultsTableSize; i++) {
         tableData.push(`<td>${myContent.results[i].title}</td>`);
@@ -298,7 +298,7 @@ function retrieveChosenEventDetails() {
 
     console.log("6. Query Address: " + apiQueryAddress);
 
-    fetchAPIdata(apiQueryAddress, "places");
+    fetchAPIdata(apiQueryAddress, "events");
 
 }
 
