@@ -2,7 +2,7 @@ var totalOptions = [];
 var totalText = "";
 var resultsTotal;
 var pageLength;
-const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=10&sort=rank";
+const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&rank.gte=85&limit=10&sort=start";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
@@ -301,7 +301,7 @@ function retrieveChosenEventDetails() {
 
     //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
-    var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=10&q=" + searchItem + "+&sort=rank";
+    var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=10&q=" + searchItem + "+&sort=start";
 
     console.log("6. Query Address: " + apiQueryAddress);
 
