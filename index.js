@@ -387,7 +387,6 @@ function filtersContinuation(myContent) {
             filterArray.push(latLongQuery);
         }
 
-        // let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
         let filterQueryString = baseAPIaddress;
 
         filterArray.forEach(filterSelection => {
@@ -397,8 +396,6 @@ function filtersContinuation(myContent) {
 
         filterQueryString = filterQueryString + "category=sports&limit=10&sort=start";
         console.log("10. Filter Query string : " + filterQueryString);
-        
-        // var filterResults = [];
 
         myContent = [];
         console.log("Content should now be cleared:", myContent);

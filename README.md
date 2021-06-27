@@ -201,83 +201,54 @@ The bottom of the page provides standard / expected social media links to popula
   [Go to the top](#table-of-contents)
 
 ## Automated testing
-### Google Developer Tools
 
-For every element that I added to my HTML, I would add the basic CSS to my stylesheet. I would then use the inspect element to try different styles. Once I've got it to my liking I would copy the CSS from google into my stylesheet. This allows me to keep track of the code I am using.
-
-### Responsive Tools
-
-I used [Am I Responsive](http://ami.responsivedesign.is/) to make sure that all my pages are responsive to all devices.
+Screen responsiveness testing was carried out using Google Chrome's Developer Tools to ensure correct page loading on multiple devices including various mobile phone and tablet sizes.
 
 ### W3C Validator Tools
 
-I used [W3C Markup](https://validator.w3.org/#validate_by_input+with_options) to check for any errors within my HTML pages.
+[W3C HTML Validator](https://validator.w3.org/) tool used to validate HTML code.
 
-I had an error on the index.html page with the iframe attribute of "frameborder". The HTML checker notified me that this attribute is obsolete and to use CSS instead.
+[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) tool used to validate CSS style code.
 
-I also had an error on the contact_us.html page with a duplicate ID of "form_inline". I rectified this by changing the ID's to a class instead and updated the CSS for this.
-
-I used [W3C CSS Validation](https://jigsaw.w3.org/css-validator/) to check for any error within my CSS stylesheet.
+[JS Hint](https://jshint.com/) used to verify Javascript coding (is unable to verfiy jQuery sections however).
 
 ## Manual Testing
 
-I have tested my site on Safari and google chrome on multiple devices.
-I also used [JS Fiddle](https://jsfiddle.net/) as a playground to test all of my code before staging and committing any changes.
+* Site loads as expected on both Motorola and Sony mobile phone devices utilising the Android operating system, running the Chrome browser. 
 
-These include:
-  - iPhone X
-  - iPhone XS Max
-  - iPad Pro
-  - Macbook Pro
+* Site loads as expected on a PC utilising the Windows operating system.  Tested using Chrome, Firefox and Edge.  All load correctly and function identically.  On the Edge browser, however, the final column renders without any outline styling on those lines where the content is empty.  Does not affect functionality in any but doesn't look quite as nice as the Chrome/Firefox rendering.
 
-Please find below my testing process for all pages via mobile and web:
+* Site loads as ecpected on an 2016 iPad Mini utilitsing the Safari browser. The table results do not highlight green when tapped as per newer devices however. This may be due to the age of the operating system so needs investigation.
 
-### All pages:
-  - Navigation Bar:
-    - Home - When selecting "home", the browser redirects me to the home page. The text in the navigation bar also stays highlighted in red. It worked as expected.
-    - Career - When selecting "career", the browser redirects me to the career page. The text in the navigation bar also stays highlighted in red. It worked as expected.
-    - Testimonials - When selecting "testimonials", the browser redirects me to the testimonials page. The text in the navigation bar also stays highlighted in red. It worked as expected.
-    - Gallery - When selecting "gallery", the browser redirects me to the gallery page. The text in the navigation bar also stays highlighted in red. It worked as expected.
-    - Contact - When selecting "contact", the browser redirects me to the contact page. The text in the navigation bar also stays highlighted in red. It worked as expected.
+* Responsiveness :
+  - The site is responsive to all break points and works as expected.
+  
+* Quick Search Input Box : 
+  - 'Loading' message is replaced with prompt to type a team or competition as expected.  
+  - Box loads with 250 event suggestions as expected. User can type as required, and either select from the filtered/remaining options or ignore as desired.
 
-    - Text:
-      - I checked that all text is in the correct and consistent size and font. I also checked that there were no typos.
+* Quick Search button :
+  - Button works as expected. Results are retrieved from the API and displayed in a table between the filter and footer sections of the page.
 
-    - Media:
-      - I checked that all images and videos on this page load. Making sure that the video played and that all images have alt text if media does not load. It worked as expected.
+* Filter buttons :
+  - 'Start Date' button - tested and works as expected.
+  - 'End Date' button - tested and works as expected.
+  - 'Filter by Sport' button - when tested, this button works when used in conjunction with other search criteria but does not work by itself.  Time constraints have left the bug unresolved for the time being.  The button does load preset sport options as designed, from which the user can select/ignore/type their own input.
+  - 'Team/Competitor' button - tested and and is not working at present. Time constraints have left the bug unresolved for the time being. Bug is suspected to be related to the 'search' string submitted to the API and is likely to be the same bug affecting the 'Filter by Competition' and 'Filter by City' buttons.
+  - 'Filter by Competition' button - tested and is not working at present. Time constraints have left the bug unresolved for the time being.
+  - 'Filter by Country' - tested and works as expected.  Preset country options load as designed, from which the user can select/ignore/type their own input.
+  - 'Filter by City' - tested and is not working at present. Bug is suspected to be related to the 'search' string submitted to the API and is likely to be the same bug affecting the 'Team/Competition' and 'Filter by Competition' buttons.
+  - 'Start Filter' - functions as expected. When clicked, the working search parameters are retrieved from the API and dsplayed in a table below the filter buttons.
 
-    - Responsiveness
-      - I checked that all pages and elements were responsive. Checking each page on mobile and website and adjusting screen size to find break points. It worked as expected.
+- Table rows
+  - Individual events highlight in green when selected on a touch screen or hovered over using a mouse.  Tested on a 2016 Apple iPad mini but this functionality was not present - possibly due to the age of the platform.
 
-  - Footer:
+* Footer Links :
+  
     - Facebook - When selecting the Facebook icon, a new tab opens and redirects to the Facebook website. It worked as expected.
     - Twitter -  When selecting the Twitter icon, a new tab opens and redirects to the Twitter website. It worked as expected.
     - YouTube - When selecting the YouTube icon, a new tab opens and redirects to the YouTube website. It worked as expected.
     - Instagram -  When selecting the Instagram icon, a new tab opens and redirects to the Instagram website. It worked as expected.
-
-### Career page:
-  - Managerial Career Statistics:
-    - Checking the statistics element is responsive on mobile and web. This worked as expected.
-
-  - Timeline:
-    - I checked for consistency within the club logos for each section in the timeline.
-    - Making sure the the headers and content text is consistent in size and font.
-    - I also checked that the timeline is in chronological order.
-
-### Testimonials page:
-  - Cards view:
-    - I tested the responsiveness of the cards view, making sure that the columns decreased as the screen got smaller.
-    - Making sure that the images do not pixelate when the screen got smaller. It worked as expected.
-
-### Gallery page:
-  - Collage:
-    - Testing all images respond to the screen getting smaller. The columns show a decrease if this happens. It worked as expected.
-    - Hovering over each image to make sure that the hover animation is working and displaying the correct text and colours.
-
-### Contact page:
-  - Contact form:
-    - Testing that each field of the form is required before submitting. It worked as expected.
-    - Checking that the submit button works and processes the form.
 
 <a name="development-cycle"></a>
 # 5. Development Cycle
@@ -359,16 +330,19 @@ I used GitHub pages to deploy my final project. To do this I had to:
   [Go to the top](#table-of-contents)
 
 ### Code
- * The navigation bar code came from [Code Pen](https://codepen.io/puskuruk/pen/bGbexXd)
- * The cards view on the index.html was inspired from [Code Pen](https://codepen.io/mcraiganthony/pen/NxGxqm)
- * The timeline feature on the career.html and awards.html page was inspired from [W3Schools](https://www.w3schools.com/howto/howto_css_timeline.asp)
- * The footer code came from the Love Running projects
- * The collage design was inspired by [W3Schools](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_grid_responsive)
- * The gallery page has a hover effect on the image the code came from [W3Schools](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_opacity)
- * The icons in the footer and contact page came from [Font Awesome](https://fontawesome.com/)
+
+* https://www.codeinwp.com/blog/fetch-api-tutorial-for-beginners/  :  main resource used whilst writing API Fetch() methods. 
+* https://css-tricks.com/using-fetch/  :  General coding advice and specific advice on handling Fetch() errors. 
+* https://gomakethings.com/how-to-use-the-fetch-method-to-make-multiple-api-calls-with-vanilla-javascript/  :  further info regarding nesting Fetch methods.
+* https://learn.co/lessons/javascript-fetch  :  website suggested by CI tutor on the subject of the Fetch() method.
+* https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#body  :  a second website suggested by CI tutor on the subject of the Fetch() method.
+* https://www.w3schools.com/ :  general advice regarding JavaScript syntax.
+* https://jqueryui.com/autocomplete/  :   for basic coding in relation to the 'Autocomplete' function used to display potential selection options in the 'Quick Search' input box (Nav Bar section).
 
 
 ### Content
- * All quotes on the index.html page came from [Planet Football](https://www.planetfootball.com/quick-reads/19-of-the-best-quotes-about-sir-alex-ferguson-such-an-iconic-person/)
- * The timeline content on the career.html page came from [Wikipedia](https://en.wikipedia.org/wiki/Alex_Ferguson)
- * All images came from [Google Images](https://www.google.com/imghp?hl=en)
+* API data :  https://www.predicthq.com/
+* Hero image provided by Riciardus from Pexels  :  [Stadium Image](https://www.pexels.com/photo/green-and-white-soccer-field-at-night-time-41257/)
+* Header picture of four devices for this README.md document  : [Am I Responsive](http://ami.responsivedesign.is/)
+* 'Social Media' icons in the footer section   :  [Font Awesome](https://fontawesome.com/)
+* README.md layout/template provided by a fellow student, iKelvvv, via Code Institute Mentor, Marcel Mulders  :  [iKelvvv README](https://github.com/iKelvvv/MS1)
