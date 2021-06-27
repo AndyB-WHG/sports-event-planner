@@ -22,9 +22,8 @@ A live website can be found [here]( https://andyb-whg.github.io/sports-event-pla
 - [4. Testing](#testing)
 - [5. Development Cycle](#development-cycle)
 - [6. Deployment](#deployment)
-- [7. End Product](#end-product)
-- [8. Known Bugs](#known-bugs)
-- [9. Credits](#credits)
+- [7. Known Bugs](#known-bugs)
+- [8. Credits](#credits)
 
 <a name="ux"></a>
 # 1. UX
@@ -254,79 +253,43 @@ Screen responsiveness testing was carried out using Google Chrome's Developer To
 # 5. Development Cycle
   [Go to the top](#table-of-contents)
 
-There were many elements I changed, re-positioned and added from my original wireframes as they were more visually appealing.
+- HTML  : Basic HTML framework was implemented first, following the layout created using the Wireframes. 
 
-### All pages:
- - Replaced the Sir Alex Photo on the top right with just a text. This is visually more appealing because the text can fit inside the navigation bar.
+- CSS  : The Wireframes were used as a guide for the styling. Changes were made as development continued as it became apparent that some of the colours selected were too 'loud' and varied and therefore needed toning down a little.  
 
-### Landing page:
-  - The original wireframe lacked attention from users. I added an embedded YouTube video to make the user more variety with different media elements. This video is also a short introduction to what the website is about.
+- Javascript : The Javascript segment has been by far the most challenging part of the development.  
 
-### Career page:
-  - I added a statistics panel to show the numbers Sir Alex achieved during his career.
-  - The original design shows the timeline is continuously on the left side of the page. I decided to change this to make the timeline appear on the centre of the page with the content displaying on the left then the right side of the page. This keeps the user engaged as the content isn't just a block of text.
+  - API connectivty : it took some time to choose an appropriate API from which to export the data required.  Connecting to the API and understanding it's Endpoints was also a serious challange.  Roughly 10 days were spend experimenting with this process before an understading how to make things work became apparent.  The next challenge was to use Javascript to connect to the API.  I contacted the college (Code Institute) who advised to use a more modern method (Fetch) to connect with the data.  Again, it took several days to get this working, having first had to research the method using the educational web links provided by the college.  Perseverence won out and eventually got it working but at the cost of considerable time.
 
-### Testimonials page:
-  - The original wireframe shows this page as an awards page with the same timeline design as the career page however, I changed this to a testimonials page. This is to give the user a better experience with a different format from the career page. As I was planning to use the same design the user would have been less engaged as they felt like they were reading the same content in the same format.
-  - I added in a cards view, this gives the user smaller amounts of content so it's easy to process. The image on each card also gives the context of who the quote was from.
+  - Quick Search' input box pre-load:  Retrieving multiple data results in order to pre-populate the 'Quick Search' box was, again, a considerable challange.  I needed the Javascript to both render a Table of Results as soon as the page loaded whilst simultaneously calling on the API on multiple occasions to load a large selection of potential events into the Quick Search box for users to choose from if required.  Getting the code to run without errors presented a number of problems which took many days and hours to iron out.  Taking the input from the box to produce a result was reletively straightforward thankfully.
 
-### Gallery page:
-  - The gallery page has remained the same. I added a hover animation over each photo to give the context of what the image is about.
-
-### Contact page:
- - After coding the contact page to the original design. I thought that it looked dull, so I added other elements to make this page visually appealing to the users.
- - Added google maps location
- - Added icons for location, telephone number and contact email.
+  - Filter Buttons: The filter button inputs are used to generate a search string for submission to the API.  The time required to make previous features function properly left little time for resolving bugs and as a result a number of the buttons do not yet provide the required filtered results.  A Results Table is still generated, but is not norrowed down as much as is required.  
 
 <a name="deployment"></a>
 # 6. Deployment
   [Go to the top](#table-of-contents)
 
-I used GitHub pages to deploy my final project. To do this I had to:
+GitHub pages was used to deploy the project. The following process was followed:
 
 1. Create a repository on GitHub.
-2. Clone the repository on your chosen source code editor (Atom in my case) using the clone link.
-4. Add files to Git (staging area) and use the atom commit to master button.
-5. Use git within atom to push the code.
-7. Go to GitHub and load your repository.
-8. Select settings.
-9. Select pages on the left menu bar.
-10. Click on the master branch.
-11. This will now generate a link with your website live.
-
-<a name="end-product"></a>
-# 7. End Product
-  [Go to the top](#table-of-contents)
-
-  Please fine below a screenshot of each page:
-
-  Home page UI:
-  ![home page preview](assets/images/home_end_product)
-
-  Career page UI:
-  ![career page preview](assets/images/career_end_product)
-
-  Testimonials page UI:
-  ![testimonials page preview](assets/images/testimonials_end_product)
-
-  Gallery page UI:
-  ![gallery page preview](assets/images/gallery_end_product)
-
-  Contact page UI:
-  ![contact page preview](assets/images/contact_end_product)
+2. Create a workspace in Gitpod.
+3. Add/create files in Gitpod and push to Github following successive additions.
+4. Go to Github respository, click on Github Pages and create a live website
 
 <a name="known-bugs"></a>
-# 8. Known Bugs
+# 7. Known Bugs
   [Go to the top](#table-of-contents)
 
-  - On some mobile devices the navigation bar appears behind the content. This was rectified by adding a z-index to the CSS for the navigation bar.
-  - My first implementation of the navigation bar was not responsive on mobile devices, meaning that the design was floating off the screen. This was rectified by implementing a new navbar that included a hamburger style button when the screen size gets smaller.
-  - The form styling on some mobile devices do not match the web styles. This was rectified by adding WebKit appearance, appearance in the CSS and set the value to none.
-  - The video on the home page was not responsive. This was fixed by adding a height value in the CSS in smaller media queries.
-  - The managerial career stats section was also not responsive. This was fixed by adding a smaller font-size value to the media query of max-width 635px. This allowed the whole section to be visible on mobile devices.
+  - 'Team/Competitor', 'Filter by Competition' and 'Filter by City' buttons do not work at the present time.  
+
+  - 'Results Table' does not always load first time. Page refresh resolves this issue and does not happen again after that.
+
+  - Searching for a partial word/name in the Quick Search box does not yield any results. This is due to API constraints and requirements. A message advising as such to be added in a later update.
+
+  - Table rows do not highlight in green on older Apple products.
 
 <a name="credits"></a>
-# 9. Credits
+# 8. Credits
   [Go to the top](#table-of-contents)
 
 ### Code
