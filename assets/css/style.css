@@ -1,3 +1,5 @@
+/*-----  Initial page setup settings  -----*/
+
 @import url('https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700|Prompt:100,200,300,400,500,600,700');
 
 @import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
@@ -11,6 +13,8 @@
 body {
     font-family: 'Exo', sans-serif;
 }
+
+/*-----  Nav Bar Section  -----*/
 
 #quick-search-input-box {
     width: 100%;
@@ -29,6 +33,7 @@ body {
     float: right;
 }
 
+/*-----  Header/Hero Image Section  -----*/
 
 header {
     height: 25em;
@@ -57,6 +62,8 @@ header {
     height: 6.2em;
     width: 7em;
 }
+
+/*-----  Filters Section  -----*/
 
 #filters {
     padding-top: 5px;
@@ -130,6 +137,8 @@ header {
 
 }
 
+/*-----  Results Table Section  -----*/
+
 #paginationButtons {
     margin-top: 1.0%;
     margin-left: 2.5%;
@@ -159,11 +168,6 @@ td, th {
     width: 100px;
 }
 
-/* #resultsTable>tbody>tr>:nth-child(2),
-#resultsTable>tbody>tr>:nth-child(3) {
-    width: 100px;
-} */
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -188,6 +192,13 @@ th:hover {
     font-size: 16px;
 }
 
+#resultsTable>tr>:nth-child(2) {
+    width: 300px !important;
+    text-align: right;
+}
+
+/*-----  Footer Section  -----*/
+
 .social-media {
     text-align: center;
     margin-top: 100px;
@@ -211,10 +222,7 @@ footer a:hover{
     color: #464241;
 }
 
-#resultsTable>tr>:nth-child(2) {
-    width: 300px !important;
-    text-align: right;
-}
+/*-----  Screen Responsiveness Section  -----*/
 
 @media (min-width: 992px) {
     .navbar-expand-lg {

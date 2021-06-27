@@ -70,80 +70,15 @@ function continuationFunction(myContent, apiType, initialPageLoad) {
     console.log("3. Page Length = " + pageLength);
     resultsTotal = myContent.count;
     itemsFetched += pageLength;
-    // let fullAPI = [];        //removed
-    // fullAPI = myContent; //removed
-    // myContent = myContent.results;
-    // console.log("Full API : " + fullAPI); //removed
-    // console.log("myContent : " + myContent); //removed
-
-
-
-
-    // console.log("4. Text : " + text);  //removed
-    // console.log("11. Items fetched : " + itemsFetched);  //removed
-    // console.log("12. Total results : " + resultsTotal);  //removed
-
-    // console.log("Total Text : " + totalText);  //removed
-    // document.getElementById("map").innerHTML = totalText;  //removed
-
-    // localStorage.setItem('apiData', options);
-
-    // if (itemsFetched >= resultsTableSize) {  //removed
-
-
+   
     if (itemsFetched <= 10 && apiType === "events") {
         createResultsTable(myContent);
     } else if (initialPageLoad === "yes") {
         (addQuickSearchOptions(myContent));
     }
-
-    // while (itemsFetched < quickSearchLoadValue && itemsFetched < myContent.count) {
-    //     fetchAPIdata(nextPage, itemsFetched, quickSearchLoadValue);
-    //     addQuickSearchOptions;
-    // } 
-
-    // Create list of options for 'Quick Search' input box then push them into the 'options' array. //removed
-
-
-
-    // }  //removed
-
-    // if (itemsFetched < resultsTotal && itemsFetched < quickSearchLoadValue && initialPageLoad === "yes") {  //removed
-    //     // console.log("13. Next Page address : " + nextPage);  //removed
-    //     // console.log("14. " + nextPage); //removed
-    //     fetchAPIdata(nextPage, itemsFetched, "yes");  //removed
-
-    // }
-
-    // If the API data is part of the initial 'Page Loading' process then convert the results into selectable option in the 'Quick Search' box.
-
-    // if (initialPageLoad === "yes") {  //removed
-
-    // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
-    // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
-
-    //     $(function autocompleteQuickSearchBox() {  //removed
-    //         totalOptions = totalOptions.concat(options);  //removed
-    //         // console.log("10. Total Options are: " + totalOptions);  //removed
-    //         var quickSearchList = totalOptions;  //removed
-    //         $("#quick-search-input-box").autocomplete({  //removed
-    //             source: quickSearchList  //removed
-    //         });  //removed
-    //     });  //removed
-
-    // }  //removed
-
-    // if (initialPageLoad === "yes") {   //removed
-    //     $("#quick-search-input-box").val("Please Enter Team or Competition Name");   //removed
-    // }   //removed
-
-    // if (itemsFetched === resultsTotal || itemsFetched >= quickSearchLoadValue || initialPageLoad === "no") {   //removed
-    //     // document.getElementById("map").innerHTML = totalText;   
-    //     itemsFetched = 0; // resets the variable ready for the next search request.   //removed
-    //     totalText = "";   //removed
-    // }  //removed
 }
 
+// Create the results table once the data has been retrieved from the API
 
 
 function createResultsTable(myContent) {
@@ -165,10 +100,7 @@ function createResultsTable(myContent) {
         pagination = `<p></p>`;
     }
 
-
-    // if (myContent.results.length < 10) {
     resultsTableSize = myContent.results.length;
-    // }
 
     for (var i = 0; i < resultsTableSize; i++) {
         tableData.push(`<td>${myContent.results[i].title}</td>`);
@@ -202,6 +134,8 @@ function createResultsTable(myContent) {
     document.getElementById("data").innerHTML = `<div id=paginationButtons>${pagination}</div><table id="resultsTable">${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
 }
 
+// Creates Pagination Buttons and inserts the HTML onto the page under the Filters section.
+
 function generatePaginationButtons(previous, next) {
     console.log("3. 'Next' variable = : " + next);
     console.log("3. 'Previous' variable = : " + previous);
@@ -216,6 +150,8 @@ function generatePaginationButtons(previous, next) {
         return `<p>Nothing to see...</p>`;
     }
 }
+
+// Takes raw 'date' data from API and converts it into dd/mm/yyy format
 
 function cleanUpDates(strToShorten) {
     let shortenedString = strToShorten.substring(0, 10);
@@ -236,6 +172,8 @@ function cleanUpDates(strToShorten) {
     return reorderedString;
 }
 
+// Makes a request to the API for the 250 biggest events in the coming year and adds them as filter options to the 'Quick Search' button.
+
 function addQuickSearchOptions(myContent) {
     for (var iter = 0, len = myContent.results.length, text = "", options = []; iter < len; iter++) {
         text += myContent.results[iter].title + "  : Rank - " + myContent.results[iter].local_rank + "<br>";
@@ -245,14 +183,10 @@ function addQuickSearchOptions(myContent) {
     totalOptions = totalOptions.concat(options);
     totalText = totalText.concat(text);
 
-    // If the API data is part of the initial 'Page Loading' process then convert the results into selectable options in the 'Quick Search' box.
-
-
-
-    // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
-    // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
-
     if (itemsFetched >= quickSearchLoadValue || itemsFetched >= resultsTotal) {
+
+        // jQuery 'Autocomplete' function  ----  populates the 'Quick Search' text box with the results   //removed
+    // of the initial API request to give potential events for the user to select from or ignore as required.  //removed
 
         $(function autocompleteQuickSearchBox() {
             var quickSearchList = totalOptions;
@@ -310,6 +244,8 @@ function retrieveChosenEventDetails() {
 }
 
 
+// Take the users 'City' Filter Buttons input and obtain the global coordinates.
+
 function buildFilterSearchQuery() {
 
     var countryFilter = "";
@@ -326,7 +262,7 @@ function buildFilterSearchQuery() {
     }
 
     if (document.getElementById("city-filter").value != "") {
-        var cityFilter = document.getElementById("city-filter").value;
+        cityFilter = document.getElementById("city-filter").value;
         console.log("City Filter value : " + cityFilter);
         cityFilter = 'q=' + cityFilter;
     }
@@ -343,13 +279,13 @@ function buildFilterSearchQuery() {
     }
 
     if (countryId != "" || cityFilter != "") {
-        fetchAPIdata(queryURL, "places", "no")
-    };
+        fetchAPIdata(queryURL, "places", "no");
+    }
 
 }
 
 
-
+// Once global coordinates obtained, feed in the remaining Filter Button inputs to generates an API request/search URL
 
 function filtersContinuation(myContent) {
 
@@ -365,6 +301,8 @@ function filtersContinuation(myContent) {
     var competitionFilter = "";
     var latitude = 0;
     var longitude = 0;
+    var countryId = "";
+    var latLongQuery = "";
     itemsFetched = 0;
 
 
@@ -430,7 +368,7 @@ function filtersContinuation(myContent) {
         }
 
         if (document.getElementById("competition-filter").value != "") {
-            var competitionFilter = document.getElementById("competition-filter").value;
+            competitionFilter = document.getElementById("competition-filter").value;
             console.log("Competition Filter value : " + competitionFilter);
             competitionFilter = '?=' + competitionFilter;
             filterArray.push(competitionFilter);
@@ -449,11 +387,7 @@ function filtersContinuation(myContent) {
             filterArray.push(latLongQuery);
         }
 
-        // build API query string
-
-        // eg. https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=100&sort=rank"
-
-        let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
+        // let eventsBaseAPIaddress = "https://api.predicthq.com/v1/events/?";
         let filterQueryString = baseAPIaddress;
 
         filterArray.forEach(filterSelection => {
@@ -464,17 +398,13 @@ function filtersContinuation(myContent) {
         filterQueryString = filterQueryString + "category=sports&limit=10&sort=start";
         console.log("10. Filter Query string : " + filterQueryString);
         
-        var filterResults = [];
+        // var filterResults = [];
 
         myContent = [];
-        console.log("Content should now be cleared:", myContent)
+        console.log("Content should now be cleared:", myContent);
 
-        fetchAPIdata(filterQueryString, "events", "no")
+        fetchAPIdata(filterQueryString, "events", "no");
 
-        continuationFunction (myContent, "events", "no")
+        continuationFunction (myContent, "events", "no");
     }
-}
-
-function convertPlaceIDsToNames(placeID) {
-
 }
