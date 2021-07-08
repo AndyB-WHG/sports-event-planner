@@ -35,7 +35,7 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
     console.log("2.0 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
-                Authorization: `Bearer w1Fryp6ndPrExYWAQc8Wr5Y8Sp4_4ac0cQFeFQks`
+                Authorization: `Bearer lY9mNgjSEsQhsx6rcFMBuKT9VGq48RhN21c5QYSyRpWpsnZEYb-i9Q`
             }
         })
         .then(response => {
