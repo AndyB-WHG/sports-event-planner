@@ -2,7 +2,7 @@ var totalOptions = [];
 var totalText = "";
 var resultsTotal;
 var pageLength;
-const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&rank.gte=85&limit=10&sort=start";
+const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&local_rank.gte=40&limit=50&sort=rank";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
