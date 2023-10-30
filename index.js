@@ -2,7 +2,7 @@ var totalOptions = [];
 var totalText = "";
 var resultsTotal;
 var pageLength;
-const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&rank.gte=85&limit=10&sort=start";
+const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&rank.gte=85&limit=10&sort=start";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
@@ -23,7 +23,7 @@ $(document).ready(function () {
     var apiType = "events";
     fetchAPIdata(initialAPIaddress, apiType, initialPageLoad);
     console.log("1. Items Fetched: " + itemsFetched);
-    var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2021-06-20&active.lte=2022-06-20&category=sports&local_rank.gte=40&limit=50&sort=rank";
+    var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&local_rank.gte=40&limit=50&sort=rank";
     fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad);
 
 });
@@ -35,7 +35,7 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
     console.log("2.0 : " + apiAddress);
     fetch(apiAddress, {
             headers: {
-                Authorization: `Bearer sKHbS4Y4sInQmhzQtQs4UUhezhRhNIpveWOVjcpS`
+                Authorization: `Bearer I664NVUkoDB6vWjd9qDCrzgoOztErkoZqJq0fWVJ`
             }
         })
         .then(response => {
