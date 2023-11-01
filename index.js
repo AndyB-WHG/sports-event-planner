@@ -39,12 +39,12 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
             }
         })
         .then(response => {
-            console.log("2.1");
+            console.log("2.1: Response");
             return response.json();
 
         })
         .then((myContent) => {
-            console.log("2.2");
+            console.log("2.2: Content");
             continuationFunction(myContent, apiType, initialPageLoad);
         })
         .catch(error => console.log(error))
@@ -70,6 +70,7 @@ function continuationFunction(myContent, apiType, initialPageLoad) {
     console.log("3. Page Length = " + pageLength);
     resultsTotal = myContent.count;
     itemsFetched += pageLength;
+    console.log("3.1 Items Fetched = " + itemsFetched);
    
     if (itemsFetched <= 10 && apiType === "events") {
         createResultsTable(myContent);
