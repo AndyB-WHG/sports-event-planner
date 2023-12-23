@@ -26,7 +26,7 @@ $(document).ready(function () {
     var apiType = "events";
     fetchAPIdata(initialAPIaddress, apiType, initialPageLoad);
     console.log("1. Items Fetched: " + itemsFetched);
-    var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&local_rank.gte=40&limit=50&sort=rank";
+    var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-12-23&active.lte=2024-12-23&category=sports&local_rank.gte=40&limit=50&sort=rank";
     fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad);
 
 });
@@ -237,7 +237,7 @@ function retrieveChosenEventDetails() {
         currentMonth = "0" + monthString;
     }
 
-    //  1. Build a query using the users selected event (retrieved from the 'Quick Search' box ie. it's '.value')
+    //  1. Build a query using the user's selected event (retrieved from the 'Quick Search' box ie. it's '.value')
 
     var apiQueryAddress = baseAPIaddress + "active.gte=" + currentYear + "-" + currentMonth + "-" + currentDay + "&active.lte=" + nextYear + "-" + currentMonth + "-" + currentDay + "&category=sports&local_rank.gte=40&limit=10&q=" + searchItem + "+&sort=start";
 
@@ -248,7 +248,7 @@ function retrieveChosenEventDetails() {
 }
 
 
-// Take the users 'City' Filter Buttons input and obtain the global coordinates.
+// Take the user's 'City' Filter Buttons input and obtains the global coordinates.
 
 function buildFilterSearchQuery() {
 
@@ -320,7 +320,7 @@ function filtersContinuation(myContent) {
 
     if (document.getElementById("start-date-filter").value === "" &&
         document.getElementById("end-date-filter").value === "" &&
-        document.getElementById("sport-filter").value === "" && document.getElementById("start-date-filter").value === "" &&
+        document.getElementById("sport-filter").value === "" && 
         document.getElementById("team-competitor-filter").value === "" &&
         document.getElementById("competition-filter").value === "" &&
         document.getElementById("country-filter").value === "" &&
