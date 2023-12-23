@@ -359,30 +359,37 @@ function filtersContinuation(myContent) {
 
         if (document.getElementById("sport-filter").value != "") {
             sportFilter = document.getElementById("sport-filter").value;
-            console.log("Sport Filter value : " + sportFilter);
             sportFilter = 'label=' + sportFilter;
+            console.log("Sport Filter value : " + sportFilter);
             filterArray.push(sportFilter);
         }
 
         if (document.getElementById("team-competitor-filter").value != "") {
             teamCompetitorFilter = document.getElementById("team-competitor-filter").value;
-            console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
             teamCompetitorFilter = '?=' + teamCompetitorFilter;
+            console.log("Team/Competitor Filter value : " + teamCompetitorFilter);
             filterArray.push(teamCompetitorFilter);
         }
 
         if (document.getElementById("competition-filter").value != "") {
             competitionFilter = document.getElementById("competition-filter").value;
-            console.log("Competition Filter value : " + competitionFilter);
             competitionFilter = '?=' + competitionFilter;
+            console.log("Competition Filter value : " + competitionFilter);
             filterArray.push(competitionFilter);
         }
 
         if (document.getElementById("country-filter").value != "") {
             var countryFilter = document.getElementById("country-filter").value;
             countryId = countryFilter.substr(0, 2);
-            console.log("Country Filter value : " + countryId);
             countryId = 'country=' + countryId;
+            console.log("Country Filter value : " + countryId);
+            filterArray.push(countryId);
+        }
+
+        if (document.getElementById("city-filter").value != "") {
+            var cityFilter = document.getElementById("city-filter").value;
+            cityID = 'country=' + countryId;
+            console.log("Country Filter value : " + countryId);
             filterArray.push(countryId);
         }
 
