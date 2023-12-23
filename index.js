@@ -20,7 +20,7 @@ $(document).ready(function () {
             <img src="assets/images/loading.gif" alt="loading..." />
           </div>`);
     $("#quick-search-input-box").val("Loading search options .... ");
-    console.log($SPORTS_EVENT_PLANNER)
+    // console.log($SPORTS_EVENT_PLANNER)
     let itemsFetched = 0;
     var initialPageLoad = "yes";
     var apiType = "events";
