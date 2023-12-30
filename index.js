@@ -15,17 +15,27 @@ var itemsFetched = 0;
 // 1. Connects to API when page is loaded.
 
 $(document).ready(function () {
+    // Add 'loading' gif
     $("#quick-search-button-wrapper").html(
         `<div id="loader">
             <img src="assets/images/loading.gif" alt="loading..." />
           </div>`);
+
+    // Add 'Loading search options' text to Quick Search box 
     $("#quick-search-input-box").val("Loading search options .... ");
     // console.log($SPORTS_EVENT_PLANNER)
+
     let itemsFetched = 0;
     var initialPageLoad = "yes";
+
+    // Set 'api type' to events 
     var apiType = "events";
+
+    //  Run the 'fetchAPIdata' function the first time of two
     fetchAPIdata(initialAPIaddress, apiType, initialPageLoad);
     console.log("1. Items Fetched: " + itemsFetched);
+
+    // 
     var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-12-23&active.lte=2024-12-23&category=sports&local_rank.gte=40&limit=50&sort=rank";
     fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad);
 
@@ -36,16 +46,22 @@ $(document).ready(function () {
 
 function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
     console.log("2.0 : " + apiAddress);
+
+    // Send token
     fetch(apiAddress, {
             headers: {
                 Authorization: `Bearer 4JpR89I33_SDMlM3tLu1FYG4orSd5L44DVqKFKAN`
             }
         })
+
+        // 
         .then(response => {
             console.log("2.1: Response");
             return response.json();
 
         })
+
+        // 
         .then((myContent) => {
             console.log("2.2: Content");
             continuationFunction(myContent, apiType, initialPageLoad);
@@ -289,7 +305,7 @@ function buildFilterSearchQuery() {
 }
 
 
-// Once global coordinates obtained, feed in the remaining Filter Button inputs to generates an API request/search URL
+// Once global coordinates obtained, feed in the remaining Filter Button inputs to generate an API request/search URL
 
 function filtersContinuation(myContent) {
 
