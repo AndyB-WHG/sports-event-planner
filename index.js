@@ -4,13 +4,31 @@ var resultsTotal;
 var pageLength;
 const initialAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-10-30&active.lte=2023-12-30&category=sports&local_rank.gte=40&limit=50&sort=rank";
 const baseAPIaddress = "https://api.predicthq.com/v1/events/?";
+const initialAPIaddress_category_section = "&category=sports&local_rank.gte=40&limit=50&sort=rank"
 const quickSearchLoadValue = 300;
 var resultsTableSize = 10;
 var itemsFetched = 0;
 
+const todaysDate = new Date();
+const currentDay = todaysDate.getDate();
+const currentMonth = todaysDate.getMonth()+1;
+const currentYear = todaysDate.getFullYear();
+const nextYear = currentYear + 1;
 
+if (currentDay < 10) {
+    var dayString = currentDay.toString();
+    currentDay = "0" + dayString;
+    }
 
+if (currentMonth < 10) {
+    var monthString = currentMonth.toString();
+    currentMonth = "0" + monthString;
+    }
 
+console.log("0.1 - Next Year : " + nextYear);
+console.log("0.2 - Today's Date : " + todaysDate);
+console.log("0.3 - Day of month : " + currentDay);
+console.log("0.4 - Month of Year : " + currentMonth);
 
 // 1. Connects to API when page is loaded.
 
@@ -23,30 +41,34 @@ $(document).ready(function () {
 
     // Add 'Loading search options' text to Quick Search box 
     $("#quick-search-input-box").val("Loading search options .... ");
+    
     // console.log($SPORTS_EVENT_PLANNER)
-
     let itemsFetched = 0;
     var initialPageLoad = "yes";
 
     // Set 'api type' to events 
     var apiType = "events";
+    console.log("1.0 Page loaded - fetching data from API - fetch 1");
 
-    //  Run the 'fetchAPIdata' function the first time of two
-    fetchAPIdata(initialAPIaddress, apiType, initialPageLoad);
-    console.log("1. Items Fetched: " + itemsFetched);
+    //  Run the 'fetchAPIdata' function the first time of two (get )
+    var fetchNum = 1
+    fetchAPIdata(initialAPIaddress, apiType, initialPageLoad, fetchNo);
+    console.log("1.1 Items Fetched: " + itemsFetched);
 
     // 
     var quickSearchLoaderAPIaddress = "https://api.predicthq.com/v1/events/?active.gte=2023-12-23&active.lte=2024-12-23&category=sports&local_rank.gte=40&limit=50&sort=rank";
-    fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad);
+    console.log("1.2 Page loaded - fetching 'quick Search' data from API - fetch 2");
+    fetchNum = 2
+    fetchAPIdata(quickSearchLoaderAPIaddress, apiType, initialPageLoad, fetchNum);
 
 });
 
 
 // 2. Handles API GET requests
 
-function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
-    console.log("2.0 : " + apiAddress);
-
+function fetchAPIdata(apiAddress, apiType, initialPageLoad, fetchNum) {
+    console.log("2.0 : fetching data from the following address : " + apiAddress);
+    console.log("Fetch Number : " + fetcNo);
     // Send token
     fetch(apiAddress, {
             headers: {
@@ -56,15 +78,17 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
 
         // 
         .then(response => {
-            console.log("2.1: Response");
+            console.log("2.1: Response.  Initial Page load? " + initialPageLoad);
+            console.log("Fetch Number : " + fetcNo);
             return response.json();
 
         })
 
         // 
         .then((myContent) => {
-            console.log("2.2: Content");
-            continuationFunction(myContent, apiType, initialPageLoad);
+            console.log("2.2: Content.  Initial Page load? " + initialPageLoad);
+            console.log("Fetch Number : " + fetcNo);
+            continuationFunction(myContent, apiType, initialPageLoad, fetchNum);
         })
         .catch(error => console.log(error))
 
@@ -74,9 +98,10 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad) {
 // 3. fetchAPIdata function (see item 2.) dumps the API data into here.
 // It then loops through each page of results 'pushing' the 'title' of each result into the 'options' array.
 
-function continuationFunction(myContent, apiType, initialPageLoad) {
+function continuationFunction(myContent, apiType, initialPageLoad, fetchNum) {
     let APItype = apiType;
     console.log(myContent);
+    console.log("3. Continuation function.  Fetch Number: " +fetchNum)
     if (apiType === "places" && myContent === null) {
         console.log("6. Places Array not found.");
         return;
