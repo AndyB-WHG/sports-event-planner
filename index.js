@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     //  Run the 'fetchAPIdata' function the first time of two (get )
     var fetchNum = 1
-    fetchAPIdata(initialAPIaddress, apiType, initialPageLoad, fetchNo);
+    fetchAPIdata(initialAPIaddress, apiType, initialPageLoad, fetchNum);
     console.log("1.1 Items Fetched: " + itemsFetched);
 
     // 
@@ -68,7 +68,7 @@ $(document).ready(function () {
 
 function fetchAPIdata(apiAddress, apiType, initialPageLoad, fetchNum) {
     console.log("2.0 : fetching data from the following address : " + apiAddress);
-    console.log("Fetch Number : " + fetcNo);
+    console.log("2.0 : Fetch Number : " + fetchNum);
     // Send token
     fetch(apiAddress, {
             headers: {
@@ -79,7 +79,7 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad, fetchNum) {
         // 
         .then(response => {
             console.log("2.1: Response.  Initial Page load? " + initialPageLoad);
-            console.log("Fetch Number : " + fetcNo);
+            console.log("2.1: Response.  Fetch Number : " + fetchNum);
             return response.json();
 
         })
@@ -87,7 +87,7 @@ function fetchAPIdata(apiAddress, apiType, initialPageLoad, fetchNum) {
         // 
         .then((myContent) => {
             console.log("2.2: Content.  Initial Page load? " + initialPageLoad);
-            console.log("Fetch Number : " + fetcNo);
+            console.log("2.2: Content.  Fetch Number : " + fetchNum);
             continuationFunction(myContent, apiType, initialPageLoad, fetchNum);
         })
         .catch(error => console.log(error))
